@@ -19,7 +19,7 @@ namespace API.Repository.Interface
         Employee GetSingle(string parameternama);
         Employee GetSingleOrDefault(string parameternama);
 
-
+        Employee GetFind(string parameternama);
 
 
         IEnumerable<Employee> GetWithWhere(string parameterNama);

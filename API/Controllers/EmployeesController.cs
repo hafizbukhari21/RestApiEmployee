@@ -66,7 +66,7 @@ namespace API.Controllers
             try
             { 
                return responseFormatter.ResponseFormater(
-                    200, 400, 
+                    200, 204, 
                     "Data Ditemukan",
                     "Data tidak Ditemukan",
                     employeeRepository.Get(nik)
@@ -145,7 +145,7 @@ namespace API.Controllers
             try
             {
                 return responseFormatter.ResponseFormater(
-                     200, 400,
+                     200, 204,
                      "First Or Default, Berhasil Mendapatkan Data",
                      "Data tidak Ditemukan",
                      employeeRepository.GetFirstOrDefault(name)
@@ -183,7 +183,7 @@ namespace API.Controllers
             try
             {
                 return responseFormatter.ResponseFormater(
-                     200, 400,
+                     200, 204,
                      "Last Or Default , Berhasil Mendapatkan Data",
                      "Data tidak Ditemukan",
                      employeeRepository.GetLastOrDefault(name)
@@ -204,7 +204,7 @@ namespace API.Controllers
             try
             {
                 return responseFormatter.ResponseFormater(
-                     200, 400,
+                     200, 204,
                      "Last , Berhasil Mendapatkan Data",
                      "Data tidak Ditemukan",
                      employeeRepository.GetLast(name)
@@ -221,6 +221,7 @@ namespace API.Controllers
         [HttpGet("GetSingle/{name}")]
         public ActionResult GetSingle(string name)
         {
+            
             try
             {
                 return responseFormatter.ResponseFormater(
@@ -244,10 +245,28 @@ namespace API.Controllers
             try
             {
                 return responseFormatter.ResponseFormater(
-                     200, 400,
+                     200, 204,
                      "Single Or Default , Berhasil Mendapatkan Data",
                      "Data tidak Ditemukan",
                      employeeRepository.GetSingleOrDefault(name)
+                 );
+            }
+            catch (Exception ex)
+            {
+                return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
+            }
+        }
+
+        [HttpGet("GetFind/{name}")]
+        public ActionResult GetFind(string name)
+        {
+            try
+            {
+                return responseFormatter.ResponseFormater(
+                     200, 204,
+                     "Find , Berhasil Mendapatkan Data",
+                     "data tidak ada",
+                     employeeRepository.GetFind(name)
                  );
             }
             catch (Exception ex)

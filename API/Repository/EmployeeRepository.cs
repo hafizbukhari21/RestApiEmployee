@@ -46,12 +46,17 @@ namespace API.Repository
 
         public Employee GetLast(string paramternama)
         {
-            return contex.Employees.OrderBy(emp =>emp.FirstName).Last(emp => emp.FirstName == paramternama);
+            return contex.Employees.ToList().Last(emp => emp.FirstName == paramternama);
         }
 
         public Employee GetLastOrDefault(string paramternama)
         {
-            return contex.Employees.OrderBy(emp => emp.FirstName).LastOrDefault(emp => emp.FirstName == paramternama);
+            return contex.Employees.ToList().LastOrDefault(emp => emp.FirstName == paramternama);
+        }
+
+        public Employee GetFind(string parameternama)
+        {
+            return contex.Employees.ToList().Find(emp => emp.FirstName ==parameternama);
         }
 
         public IEnumerable<Employee> GetWithWhere(string parameterNama)
@@ -61,7 +66,7 @@ namespace API.Repository
 
         public Employee GetSingle(string parameternama)
         {
-            return contex.Employees.Single(emp => emp.FirstName == parameternama);
+            return contex.Employees.ToList().Single(emp => emp.FirstName == parameternama);
         }
 
 

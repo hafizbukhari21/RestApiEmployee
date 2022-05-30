@@ -11,6 +11,11 @@ namespace API
         public static bool isProduction = false;
 
         //message Api
-        public static Object messageObj = new { time = DateTime.Now, author = "Hafiz Bukhari", Ver = "v1" };
+        public static Object messageObj = new { 
+            time = DateTime.Now, 
+            author = "Hafiz Bukhari", 
+            Ver = "v1", 
+           //isProduction  
+        };
     }
 }
