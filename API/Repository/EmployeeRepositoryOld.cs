@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace API.Repository
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepositoryOld : IEmployeeRepository
     {
         private readonly MyContext contex;
-        public EmployeeRepository(MyContext contex)
+        public EmployeeRepositoryOld(MyContext contex)
         {
             this.contex = contex;
         }
@@ -56,7 +56,7 @@ namespace API.Repository
 
         public Employee GetFind(string parameternama)
         {
-            return contex.Employees.ToList().Find(emp => emp.FirstName ==parameternama);
+            return contex.Employees.Find(parameternama);
         }
 
         public IEnumerable<Employee> GetWithWhere(string parameterNama)

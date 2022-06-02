@@ -4,14 +4,16 @@ using API.Contex;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220531042938_final")]
+    partial class final
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,10 +46,14 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("degree")
+                    b.Property<string>("degree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("university_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("universityid")
+                    b.Property<int?>("universityid")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -83,9 +89,6 @@ namespace API.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
                     b.HasKey("NIK");
 
                     b.ToTable("Employees");
@@ -95,6 +98,9 @@ namespace API.Migrations
                 {
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("education_id")
+                        .HasColumnType("int");
 
                     b.Property<int?>("educationid")
                         .HasColumnType("int");
@@ -136,9 +142,7 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.University", "university")
                         .WithMany("educations")
-                        .HasForeignKey("universityid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("universityid");
 
                     b.Navigation("university");
                 });

@@ -15,6 +15,7 @@ using API.Models;
 using API.Contex;
 using Microsoft.EntityFrameworkCore;
 using API.Repository;
+using API.Repository.Data;
 
 namespace API
 {
@@ -32,7 +33,9 @@ namespace API
         {
 
             services.AddControllers();
+            services.AddScoped<EmployeeRepositoryOld>();
             services.AddScoped<EmployeeRepository>();
+            services.AddScoped<AccountRepository>();
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("APIContext")));
             services.AddSwaggerGen(c =>
             {

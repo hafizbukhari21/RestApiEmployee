@@ -4,14 +4,16 @@ using API.Contex;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220531041905_revert2")]
+    partial class revert2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,19 +42,12 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("GPA")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("degree")
-                        .HasColumnType("int");
-
-                    b.Property<int>("universityid")
+                    b.Property<int?>("Universityid")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("universityid");
+                    b.HasIndex("Universityid");
 
                     b.ToTable("Education");
                 });
@@ -83,9 +78,6 @@ namespace API.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
                     b.HasKey("NIK");
 
                     b.ToTable("Employees");
@@ -95,6 +87,9 @@ namespace API.Migrations
                 {
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("education_id")
+                        .HasColumnType("int");
 
                     b.Property<int?>("educationid")
                         .HasColumnType("int");
@@ -134,13 +129,9 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Education", b =>
                 {
-                    b.HasOne("API.Models.University", "university")
+                    b.HasOne("API.Models.University", null)
                         .WithMany("educations")
-                        .HasForeignKey("universityid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("university");
+                        .HasForeignKey("Universityid");
                 });
 
             modelBuilder.Entity("API.Models.Profiling", b =>
