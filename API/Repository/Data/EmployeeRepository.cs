@@ -69,6 +69,21 @@ namespace API.Repository.Data
             return emp != null;
         }
 
+        public int Login(LoginPegawaiVM loginPegawaiVM)
+        {
+            Account acc = (from ac in context.Accounts
+                            join em in context.Employees
+                            on ac.NIK equals em.NIK
+                            where em.Email == loginPegawaiVM.email
+                            select ac
+                            ).FirstOrDefault();
+            if (acc == null) return 204;
+
+            if (BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, acc.password)) return 200;
+            else return 500;
+            
+        }
+
         public string GetAutoIncrementConvertString()
         {
             Employee emp = context.Employees.ToList().LastOrDefault();

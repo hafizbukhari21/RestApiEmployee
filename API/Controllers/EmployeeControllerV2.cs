@@ -17,6 +17,7 @@ namespace API.Controllers
     {
 
         public EmployeeRepository employeeRepository;
+        private ResponseFormatter responseFormatter = new ResponseFormatter();
         public EmployeeControllerV2(EmployeeRepository employeeRepository) : base(employeeRepository)
         {
             this.employeeRepository = employeeRepository;
@@ -26,16 +27,31 @@ namespace API.Controllers
         [HttpPost("cobaregister")]
         public ActionResult GetRegister(RegisterPegawaiVM registerPegawaiVM)
         {
-            if (employeeRepository.EmailIsUsed(registerPegawaiVM.Email))
-            {
-                return Ok("Email sudah digunakan");
-            }
 
-            if (employeeRepository.PhoneIsUsed(registerPegawaiVM.Phone))
+            try
             {
-                return Ok("No Telp sudah digunakan");
+
+                if (employeeRepository.EmailIsUsed(registerPegawaiVM.Email)) return Ok("Email sudah digunakan");
+                if (employeeRepository.PhoneIsUsed(registerPegawaiVM.Phone)) return Ok("No Telp sudah digunakan");
+                return responseFormatter.ResponseFormater(
+                     200, 400,
+                     "Berhasil Mendapatkan semua Data Pegawai",
+                     "Data tidak Ditemukan",
+                     employeeRepository.GetRegister(registerPegawaiVM)
+                 );
             }
-            return Ok(employeeRepository.GetRegister(registerPegawaiVM));
+            catch (Exception ex)
+            {
+                return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
+            }
+        }
+
+        [HttpPost("cobalogin")]
+        public ActionResult GetLogin(LoginPegawaiVM loginPegawaiVM)
+        {
+            return StatusCode(employeeRepository.Login(loginPegawaiVM),new { 
+                Message="Ok"
+            });
         }
 
 
