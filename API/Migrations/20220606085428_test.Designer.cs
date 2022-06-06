@@ -4,14 +4,16 @@ using API.Contex;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220606085428_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,22 +46,15 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.AccountRole", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("nik")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("idRole")
                         .HasColumnType("int");
 
-                    b.Property<string>("nik")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("id");
+                    b.HasKey("nik", "idRole");
 
                     b.HasIndex("idRole");
-
-                    b.HasIndex("nik");
 
                     b.ToTable("accountRoles");
                 });
@@ -188,7 +183,9 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Account", "account")
                         .WithMany("accountRoles")
-                        .HasForeignKey("nik");
+                        .HasForeignKey("nik")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("account");
 

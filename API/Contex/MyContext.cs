@@ -30,14 +30,28 @@ namespace API.Contex
             modelBuilder.Entity<Education>()
                 .HasMany(prof => prof.profiling)
                 .WithOne(edu => edu.education);
-                
-                
-
+          
 
             modelBuilder.Entity<University>()
                 .HasMany(edu => edu.educations)
                 .WithOne(uni => uni.university);
-                
+
+
+            //modelBuilder.Entity<AccountRole>()
+            //     .HasKey(acr => new { acr.nik, acr.idRole });
+
+            modelBuilder.Entity<AccountRole>()
+                .HasOne(ac => ac.account)
+                .WithMany(acr => acr.accountRoles)
+                .HasForeignKey(acr => acr.nik);
+
+            modelBuilder.Entity<AccountRole>()
+                .HasOne(ar => ar.role)
+                .WithMany(acr => acr.accountRole)
+                .HasForeignKey(ar => ar.idRole);
+           
+          
+            
 
 
         }
@@ -46,6 +60,8 @@ namespace API.Contex
 
         public DbSet<Employee> Employees { set; get; }
         public DbSet<Account> Accounts { set;get; }
+        public DbSet<AccountRole> accountRoles { set; get; }
+        public DbSet<Role> roles { set; get; }
         public DbSet<Profiling> Profilings { set; get; }
         public DbSet<Education> Education { set; get; }
         public DbSet<University> University { set; get; }

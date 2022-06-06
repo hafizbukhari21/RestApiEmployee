@@ -5,7 +5,9 @@ using BCrypt.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using API.Utils;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository.Data
 {
@@ -34,7 +36,7 @@ namespace API.Repository.Data
                 Gender = registerPegawaiVM.Gender == 1 ? Models.Gender.Female : Models.Gender.Male,
                 account = new Account
                 {
-                    password = BCryptHasing(registerPegawaiVM.password),
+                    password = Tools.BCryptHasing(registerPegawaiVM.password),
                     profiling = new Profiling
                     {
                         education = new Education
@@ -47,15 +49,17 @@ namespace API.Repository.Data
                 }
             };
 
+            AccountRole acr = new AccountRole
+            {
+                nik = emp.NIK,
+                idRole = 1
+            };
+            context.accountRoles.Add(acr);
             context.Add(emp);
             return context.SaveChanges();
         }
 
-        public string BCryptHasing(string password)
-        {
-            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
-            return BCrypt.Net.BCrypt.HashPassword(password, salt);
-        }
+        
 
         public bool EmailIsUsed(string Email)
         {
@@ -69,20 +73,16 @@ namespace API.Repository.Data
             return emp != null;
         }
 
-        public int Login(LoginPegawaiVM loginPegawaiVM)
-        {
-            Account acc = (from ac in context.Accounts
-                            join em in context.Employees
-                            on ac.NIK equals em.NIK
-                            where em.Email == loginPegawaiVM.email
-                            select ac
-                            ).FirstOrDefault();
-            if (acc == null) return 204;
+        //public float Login(LoginPegawaiVM loginPegawaiVM)
+        //{
+        //    Employee emCkh = context.Employees.Include("account").FirstOrDefault(emp => emp.Email == loginPegawaiVM.email);
 
-            if (BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, acc.password)) return 200;
-            else return 500;
+        //    if (emCkh.Email != loginPegawaiVM.email) return Variable.EMAIL_NOT_FOUND;// email gk ada
+        //    else if (BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, emCkh.account.password)) return Variable.PASSWORD_NOT_FOUND;//password tidak match
+
+        //    else return 500;
             
-        }
+        //}
 
         public string GetAutoIncrementConvertString()
         {
@@ -108,16 +108,16 @@ namespace API.Repository.Data
             switch (degree)
             {
                 case 1:
-                    return Models.Degree.D3; break;
+                    return Models.Degree.D3;
 
                 case 2:
-                    return Models.Degree.D4; break;
+                    return Models.Degree.D4;
                 case 3:
-                    return Models.Degree.S1; break;
-                case 4:
-                    return Models.Degree.S2; break;
+                    return Models.Degree.S1;
+                case 4: 
+                    return Models.Degree.S2;
                 case 5:
-                    return Models.Degree.S3; break;
+                    return Models.Degree.S3;
                 default:
                     return 0;
 

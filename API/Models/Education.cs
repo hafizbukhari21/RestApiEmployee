@@ -18,13 +18,13 @@ namespace API.Models
         [Required]
         public string GPA { set; get; }
 
-        
+      
 
         public ICollection<Profiling> profiling { set; get; }
 
-       
-       
         public University university { set; get; }
+
+       
 
 
 

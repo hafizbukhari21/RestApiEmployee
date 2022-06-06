@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Repository.Data;
 using API.ViewModel;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -21,6 +22,7 @@ namespace API.Controllers
         public EmployeeControllerV2(EmployeeRepository employeeRepository) : base(employeeRepository)
         {
             this.employeeRepository = employeeRepository;
+           
         }
 
 
@@ -28,31 +30,31 @@ namespace API.Controllers
         public ActionResult GetRegister(RegisterPegawaiVM registerPegawaiVM)
         {
 
-            try
-            {
+
+            
 
                 if (employeeRepository.EmailIsUsed(registerPegawaiVM.Email)) return Ok("Email sudah digunakan");
                 if (employeeRepository.PhoneIsUsed(registerPegawaiVM.Phone)) return Ok("No Telp sudah digunakan");
                 return responseFormatter.ResponseFormater(
                      200, 400,
-                     "Berhasil Mendapatkan semua Data Pegawai",
-                     "Data tidak Ditemukan",
+                     "Berhasil Menambahkan Data Baru",
+                     "ID NIK duplicate atau kesalahan server",
                      employeeRepository.GetRegister(registerPegawaiVM)
                  );
-            }
-            catch (Exception ex)
-            {
-                return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
-            }
+            
+          
         }
 
-        [HttpPost("cobalogin")]
-        public ActionResult GetLogin(LoginPegawaiVM loginPegawaiVM)
-        {
-            return StatusCode(employeeRepository.Login(loginPegawaiVM),new { 
-                Message="Ok"
-            });
-        }
+        
+
+        //[HttpGet("mailtest")]
+        //public ActionResult MailTest()
+        //{
+        //    EmailServices mail = new EmailServices();
+
+        //    mail.SendEmail("hafiz.bukhari@hotmail.com", "hehe", "eeeeee");
+        //    return Ok(200);
+        //}
 
 
     

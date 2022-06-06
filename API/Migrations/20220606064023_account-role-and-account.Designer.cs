@@ -4,14 +4,16 @@ using API.Contex;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220606064023_account-role-and-account")]
+    partial class accountroleandaccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,17 +51,23 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("accountNIK")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("idRole")
                         .HasColumnType("int");
 
                     b.Property<string>("nik")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("roleidROle")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("idRole");
+                    b.HasIndex("accountNIK");
 
-                    b.HasIndex("nik");
+                    b.HasIndex("roleidROle");
 
                     b.ToTable("accountRoles");
                 });
@@ -139,7 +147,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Role", b =>
                 {
-                    b.Property<int>("idRole")
+                    b.Property<int>("idROle")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -147,7 +155,7 @@ namespace API.Migrations
                     b.Property<string>("nama_role")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("idRole");
+                    b.HasKey("idROle");
 
                     b.ToTable("roles");
                 });
@@ -180,15 +188,13 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.AccountRole", b =>
                 {
-                    b.HasOne("API.Models.Role", "role")
-                        .WithMany("accountRole")
-                        .HasForeignKey("idRole")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("API.Models.Account", "account")
                         .WithMany("accountRoles")
-                        .HasForeignKey("nik");
+                        .HasForeignKey("accountNIK");
+
+                    b.HasOne("API.Models.Role", "role")
+                        .WithMany("accountRole")
+                        .HasForeignKey("roleidROle");
 
                     b.Navigation("account");
 
