@@ -26,12 +26,9 @@ namespace API.Controllers
         }
 
 
-        [HttpPost("cobaregister")]
-        public ActionResult GetRegister(RegisterPegawaiVM registerPegawaiVM)
+        [HttpPost("register")]
+        public ActionResult Register(RegisterPegawaiVM registerPegawaiVM)
         {
-
-
-            
 
                 if (employeeRepository.EmailIsUsed(registerPegawaiVM.Email)) return Ok("Email sudah digunakan");
                 if (employeeRepository.PhoneIsUsed(registerPegawaiVM.Phone)) return Ok("No Telp sudah digunakan");
@@ -43,6 +40,11 @@ namespace API.Controllers
                  );
             
           
+        }
+        [HttpPost("GetRegisterData")]
+        public ActionResult GetRegisterData()
+        {
+            return Ok(employeeRepository.GetRegisterData());
         }
 
         

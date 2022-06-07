@@ -57,7 +57,7 @@ namespace API.Controllers
                 return StatusCode(202, new { Message = "Berhasil login" });
         }
 
-        [HttpPost("loginJWT")]
+        [HttpPost("Login")]
         public ActionResult Login(LoginPegawaiVM loginPegawaiVM)
         {
             if (accountRepository.Login(loginPegawaiVM) == 200)

@@ -18,7 +18,7 @@ namespace API.ViewModel
 
         public string Email { get; set; }
 
-        public int Gender { set; get; }
+        public string Gender { set; get; }
         public string gpa { set; get; }
 
         public int Degree { set; get; }

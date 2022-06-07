@@ -33,7 +33,7 @@ namespace API.Repository.Data
                 BirthDate = registerPegawaiVM.BirthDate,
                 Salary = registerPegawaiVM.Salary,
                 Email = registerPegawaiVM.Email,
-                Gender = registerPegawaiVM.Gender == 1 ? Models.Gender.Female : Models.Gender.Male,
+                Gender = (Gender)Enum.Parse(typeof(Gender),registerPegawaiVM.Gender),
                 account = new Account
                 {
                     password = Tools.BCryptHasing(registerPegawaiVM.password),
@@ -99,6 +99,26 @@ namespace API.Repository.Data
             return  currentNIK.ToString();
 
 
+            
+        }
+
+        public Object GetRegisterData()
+        {
+            return context.Employees.Include(emp => emp.account.profiling.education.university)
+                .Select(emp =>
+                    new
+                    {
+                        FirstName = emp.FirstName,
+                        PhoneNumber = emp.Phone,
+                        BirthDate = emp.BirthDate,
+                        Salary = emp.Salary,
+                        Email = emp.Email,
+                        Degree = emp.account.profiling.education.degree,
+                        Gender = emp.Gender.ToString(),
+                        GPA = emp.account.profiling.education.GPA,
+                        UniveristyName = emp.account.profiling.education.university.nama
+                    }
+                ).ToList();
             
         }
 
