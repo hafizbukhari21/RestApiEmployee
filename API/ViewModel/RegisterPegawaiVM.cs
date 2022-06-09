@@ -21,11 +21,10 @@ namespace API.ViewModel
         public string Gender { set; get; }
         public string gpa { set; get; }
 
-        public int Degree { set; get; }
+        public string Degree { set; get; }
  
         public string password { set; get; }
 
-        public bool isDeleted { set; get; }
         public int univeristyId { set; get; }
 
 

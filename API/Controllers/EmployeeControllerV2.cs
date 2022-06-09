@@ -14,9 +14,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-    
+
     [ApiController]
-    public class EmployeeControllerV2 : BaseController<Employee,EmployeeRepository,string>
+    public class EmployeeControllerV2 : BaseController<Employee, EmployeeRepository, string>
     {
 
         public EmployeeRepository employeeRepository;
@@ -26,7 +26,7 @@ namespace API.Controllers
         {
             this.employeeRepository = employeeRepository;
             this._configuration = configuration;
-           
+
         }
 
 
@@ -34,19 +34,19 @@ namespace API.Controllers
         public ActionResult Register(RegisterPegawaiVM registerPegawaiVM)
         {
 
-                if (employeeRepository.EmailIsUsed(registerPegawaiVM.Email)) return Ok("Email sudah digunakan");
-                if (employeeRepository.PhoneIsUsed(registerPegawaiVM.Phone)) return Ok("No Telp sudah digunakan");
-                return responseFormatter.ResponseFormater(
-                     200, 400,
-                     "Berhasil Menambahkan Data Baru",
-                     "ID NIK duplicate atau kesalahan server",
-                     employeeRepository.GetRegister(registerPegawaiVM)
-                 );
-            
-          
+            if (employeeRepository.EmailIsUsed(registerPegawaiVM.Email)) return Ok("Email sudah digunakan");
+            if (employeeRepository.PhoneIsUsed(registerPegawaiVM.Phone)) return Ok("No Telp sudah digunakan");
+            return responseFormatter.ResponseFormater(
+                 200, 400,
+                 "Berhasil Menambahkan Data Baru",
+                 "ID NIK duplicate atau kesalahan server",
+                 employeeRepository.GetRegister(registerPegawaiVM)
+             );
+
+
         }
         [Authorize(Roles = "Direktur, Manager")]
-        
+
         [HttpPost("GetRegisterData")]
         public ActionResult<String> GetRegisterData()
         {
@@ -59,6 +59,12 @@ namespace API.Controllers
         public ActionResult TestCors()
         {
             return Ok("Berhasil Cors");
+        }
+
+        [HttpDelete("DeleteAlternative")]
+        public ActionResult DeleteAlter(string nik)
+        {
+            return Ok(employeeRepository.DeleteAlter(nik));
         }
 
         

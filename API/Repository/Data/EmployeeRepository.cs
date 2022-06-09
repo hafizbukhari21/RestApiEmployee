@@ -26,7 +26,7 @@ namespace API.Repository.Data
             UniversityRepository universityRepository = new UniversityRepository(context);
             Employee emp = new Employee
             {
-                NIK =DateTime.Now.ToString("MMddyyyy")+" "+ GetAutoIncrementConvertString(),
+                NIK =DateTime.Now.ToString("MMddyyyy")+ GetAutoIncrementConvertString(),
                 FirstName = registerPegawaiVM.FirstName,
                 LastName = registerPegawaiVM.LastName,
                 Phone = registerPegawaiVM.Phone,
@@ -41,7 +41,7 @@ namespace API.Repository.Data
                     {
                         education = new Education
                         {
-                            degree = CheckDegree(registerPegawaiVM.Degree),
+                            degree = (Degree)Enum.Parse(typeof(Degree), registerPegawaiVM.Degree),
                             GPA = registerPegawaiVM.gpa,
                             university = universityRepository.GetUniversityById(registerPegawaiVM.univeristyId)
                         }
@@ -120,6 +120,19 @@ namespace API.Repository.Data
                     }
                 ).ToList();
             
+        }
+
+        public int DeleteAlter(string nik)
+        {
+            AccountRole acr = context.accountRoles.FirstOrDefault(acr => acr.nik == nik);
+            context.accountRoles.Remove(acr);
+
+            context.SaveChanges();
+
+            Employee emp = context.Employees.Find(nik);
+            context.Employees.Remove(emp);
+
+            return context.SaveChanges();
         }
 
 
