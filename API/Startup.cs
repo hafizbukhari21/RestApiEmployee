@@ -65,7 +65,7 @@ namespace API
                 };
             });
             services.AddCors(c => {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44319", "http://127.0.0.1:5500"));
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
         }
 
@@ -87,7 +87,7 @@ namespace API
 
             app.UseAuthorization();
 
-            app.UseCors(options => options.WithOrigins("https://localhost:44319", "http://127.0.0.1:5500"));
+            app.UseCors(options => options.AllowAnyOrigin());
 
 
             app.UseEndpoints(endpoints =>
