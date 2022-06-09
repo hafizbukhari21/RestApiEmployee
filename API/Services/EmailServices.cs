@@ -15,10 +15,10 @@ namespace API.Services
         {
             var client = new SmtpClient("smtp.ethereal.email", 587)
             {
-                Credentials = new NetworkCredential("catherine.cassin22@ethereal.email", "9WPf3dZm1B9Nxbezws"),
+                Credentials = new NetworkCredential("jane.fritsch62@ethereal.email", "t8R28Wv47gjQaqMhFq"),
                 EnableSsl = true
             };
-            client.Send("catherine.cassin22@ethereal.email", "hafiz.210398@gmail.com", subject, body);
+            client.Send("jane.fritsch62@ethereal.email", "hafiz.210398@gmail.com", subject, body);
          
         }
         

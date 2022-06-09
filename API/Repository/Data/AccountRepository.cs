@@ -90,17 +90,17 @@ namespace API.Repository.Data
 
         }
 
-        public int SetManager (InsertManagerVM insertManagervm)
-        {
-            AccountRole acr = new AccountRole()
-            {
-                nik = insertManagervm.nik,
-                idRole = 3
-            };
+        //public int SetManager (InsertManagerVM insertManagervm)
+        //{
+        //    AccountRole acr = new AccountRole()
+        //    {
+        //        nik = insertManagervm.nik,
+        //        idRole = 3
+        //    };
 
-            contex.accountRoles.Add(acr);
-            return contex.SaveChanges();
-        }
+        //    contex.accountRoles.Add(acr);
+        //    return contex.SaveChanges();
+        //}
 
         
     }

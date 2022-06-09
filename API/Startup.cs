@@ -39,6 +39,7 @@ namespace API
             services.AddScoped<EmployeeRepositoryOld>();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountRoleRepository>();
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("APIContext")));
             services.AddSwaggerGen(c =>
             {
@@ -63,6 +64,9 @@ namespace API
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddCors(c => {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44319", "http://127.0.0.1:5500"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +86,9 @@ namespace API
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.WithOrigins("https://localhost:44319", "http://127.0.0.1:5500"));
+
 
             app.UseEndpoints(endpoints =>
             {

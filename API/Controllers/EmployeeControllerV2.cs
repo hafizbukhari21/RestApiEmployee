@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using API.Repository.Data;
 using API.ViewModel;
 using API.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -18,10 +20,12 @@ namespace API.Controllers
     {
 
         public EmployeeRepository employeeRepository;
+        public IConfiguration _configuration;
         private ResponseFormatter responseFormatter = new ResponseFormatter();
-        public EmployeeControllerV2(EmployeeRepository employeeRepository) : base(employeeRepository)
+        public EmployeeControllerV2(EmployeeRepository employeeRepository, IConfiguration configuration) : base(employeeRepository)
         {
             this.employeeRepository = employeeRepository;
+            this._configuration = configuration;
            
         }
 
@@ -41,10 +45,20 @@ namespace API.Controllers
             
           
         }
+        [Authorize(Roles = "Direktur, Manager")]
+        
         [HttpPost("GetRegisterData")]
-        public ActionResult GetRegisterData()
+        public ActionResult<String> GetRegisterData()
         {
-            return Ok(employeeRepository.GetRegisterData());
+            var payload = JWTConfig.JwtParse(employeeRepository.GetRegisterData(), _configuration);
+
+            return Ok(payload);
+        }
+
+        [HttpGet("TestCors")]
+        public ActionResult TestCors()
+        {
+            return Ok("Berhasil Cors");
         }
 
         

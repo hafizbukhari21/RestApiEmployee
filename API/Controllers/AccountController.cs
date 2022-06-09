@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/account/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : BaseController<Account,AccountRepository, string>
     {
@@ -86,12 +86,12 @@ namespace API.Controllers
             return BadRequest();
         }
 
-        [Authorize(Roles = "Direktur")]
-        [HttpPost("SetManager")]
-        public ActionResult SetManager(InsertManagerVM insertManagervm)
-        {
-            return Ok(accountRepository.SetManager(insertManagervm));
-        }
+        //[Authorize(Roles = "Direktur")]
+        //[HttpPost("SetManager")]
+        //public ActionResult SetManager(InsertManagerVM insertManagervm)
+        //{
+        //    return Ok(accountRepository.SetManager(insertManagervm));
+        //}
 
 
       
