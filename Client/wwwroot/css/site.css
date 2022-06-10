@@ -1,71 +1,87 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿.bgImage{
+   position:absolute;
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.item1 {
+    grid-area: myArea;
+    
+}
+.item7{
+    grid-area: area7;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+h1{
+    font-size:50px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.maincontent {
+    width: 350px;
+    margin: auto;
+    position: absolute;
+    transition: 0.3s;
+}
+.maincontent:hover{
+    width:400px;
+}
+.alterContent:hover{
+    width:330px
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.alterContent {
+    width: 300px;
+    margin: auto;
+    position: absolute;
+    transition:0.3s;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.item, .item7, .item1{
+    display:flex;
+    position:relative;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.keterangan {
+    position: absolute;
+    color: wheat;
+    text-align: left;
+    bottom: 0;
+    left: 0;
+    padding: 4px;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6951914554884453) 53%, rgba(0,0,0,0) 100%);
+    opacity:0;
+    transition:0.3s;
+}
+.item:hover >.keterangan{
+    opacity:1;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+h4{
+    font-size:30px;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.keterangan>p{
+    font-size:10px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+
+.gridContainer {
+    height:60vh;
+    display: grid;
+    grid-template-areas:
+        'myArea myArea . . '
+        'myArea myArea . . '
+        '. . area7 area7 '
+        '. . area7 area7 ';
+    background-color:black;
+}
+
+.gridContainer > div, .mainitem {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px ;
+    font-size: 30px;
 }
