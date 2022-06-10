@@ -9,6 +9,12 @@ namespace API.Models
 {
     public class Education
     {
+
+        public Education()
+        {
+            profiling = new HashSet<Profiling>();
+        }
+
         [Key]
         public int id { set; get; }
 
@@ -20,9 +26,9 @@ namespace API.Models
 
       
 
-        public ICollection<Profiling> profiling { set; get; }
+        public  virtual ICollection<Profiling> profiling { set; get; }
 
-        public University university { set; get; }
+        public virtual University university { set; get; }
 
        
 

@@ -8,6 +8,7 @@ namespace API.Models
 {
     public class Employee
     {
+       
         [Key]
         public string NIK { get; set; }
         public string FirstName { get; set; }
@@ -25,7 +26,7 @@ namespace API.Models
 
         public  bool isDeleted { set;get;}
 
-        public Account account { set; get; }
+        public virtual Account account { set; get; }
      
         
     }

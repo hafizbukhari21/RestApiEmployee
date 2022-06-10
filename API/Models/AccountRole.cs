@@ -17,8 +17,8 @@ namespace API.Models
 
         public string nik { set; get; }
 
-        public Account account { set; get; }
-        public Role role { set; get; }
+        public virtual Account account { set; get; }
+        public virtual Role role { set; get; }
         
 
 

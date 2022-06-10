@@ -9,13 +9,17 @@ namespace API.Models
 {
     public class University
     {
+        public University()
+        {
+            educations = new HashSet<Education>();
+        }
         [Key]
         [Required]
         [ForeignKey("id")]
         public int id { set; get; }
         public string nama { set; get; }
 
-        public ICollection<Education> educations {set;get;}
+        public virtual ICollection<Education> educations {set;get;}
 
         
     }

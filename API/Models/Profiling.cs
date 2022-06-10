@@ -16,8 +16,8 @@ namespace API.Models
 
        
 
-        public Account account { set; get; }
-        public Education education { set; get; }
+        public virtual Account account { set; get; }
+        public virtual Education education { set; get; }
 
     }
 }

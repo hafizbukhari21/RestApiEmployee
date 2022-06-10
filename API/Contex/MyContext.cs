@@ -55,7 +55,17 @@ namespace API.Contex
 
 
         }
-        
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                     .UseLazyLoadingProxies();
+                    
+            }
+        }
+
 
 
         public DbSet<Employee> Employees { set; get; }
