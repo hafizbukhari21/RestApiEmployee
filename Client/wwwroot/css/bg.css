@@ -1,0 +1,88 @@
+﻿
+.bgWrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    
+}
+.bg {
+    margin: auto;
+    width: 200vw;
+    height: 200vw;
+    position: absolute;
+    transform: rotateZ(0deg);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(3,0,113,1) 100%);
+    animation: rotateBg 60s infinite linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.bg-circle {
+    margin: 1vw;
+    border-radius: 30vw;
+    filter: blur(100px);
+    opacity: .6;
+}
+
+.circle1 {
+    width: 90vw;
+    height: 90vw;
+    animation: circle1 60s infinite linear;
+    background: linear-gradient(0deg, rgba(5,35,77,1) 0%, rgba(123,136,184,1) 49%, rgba(253,233,170,1) 100%);
+}
+
+@keyframes circle1{
+    0% {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    50% {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    100% {
+        width: 90vw;
+        height: 90vw;
+    }
+}
+
+.circle2 {
+    width: 30vw;
+    height: 30vw;
+    animation: circle2 60s infinite linear;
+    background: linear-gradient(0deg, rgba(253,233,170,1) 0%, rgba(123,136,184,1) 49%, rgba(5,35,77,1) 100%);
+}
+
+@keyframes circle2 {
+    0% {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    50% {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    100% {
+        width: 30vw;
+        height: 30vw;
+    }
+}
+
+
+
+
+@keyframes rotateBg{
+    to{
+        transform:rotateZ(360deg)
+    }
+}
+

@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Client</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/bg.css" />
 </head>
 <body>
     <header>
@@ -35,8 +36,13 @@
             </div>
         </nav>
     </header>
-    <div class="bgImage"></div>
-    <div class="container ">
+    <div class="bgWrapper">
+        <div class="bg">
+            <div class="bg-circle circle1"></div>
+            <div class="bg-circle circle2"></div>
+        </div>
+    </div>
+    <div class="container">
         <main role="main" class="pb-3 ">
             @RenderBody()
 

@@ -1,6 +1,5 @@
 ﻿.bgImage{
    position:absolute;
-
 }
 
 .item1 {
@@ -16,24 +15,25 @@ h1{
 }
 
 .maincontent {
-    width: 350px;
+    width: 30vw;
     margin: auto;
     position: absolute;
     transition: 0.3s;
 }
-.maincontent:hover{
-    width:400px;
+.item:hover .maincontent {
+    width: 35vw;
 }
-.alterContent:hover{
-    width:330px
+.item:hover .alterContent {
+    width: 20vw;
 }
 
 .alterContent {
-    width: 300px;
+    width: 15vw;
     margin: auto;
     position: absolute;
     transition:0.3s;
 }
+
 
 .item, .item7, .item1{
     display:flex;
