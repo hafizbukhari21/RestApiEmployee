@@ -1,0 +1,145 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+    .showImage {
+        
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .showImage>img{
+        width:150px;
+        height:auto;
+        
+    }
+
+    .ShowChartWrapper {
+        display:none
+    }
+
+    .capitalCase {
+        text-transform: capitalize;
+    }
+</style>
+
+<table class="table table-striped" style="margin-top:50px">
+    <thead>
+    <th class="text-light" >No</th>
+    <th class="text-light" >Name</th>
+    <th class="text-light" > URL</th>
+    <th class="text-light">Action</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle capitalCase">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetchart()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body " >
+               
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                    <div class="carousel-inner">
+                        <div class="carousel-item showImage active" >
+                            <img class="showPokeBack" src="" />
+                        </div>
+                        
+                        <div class="carousel-item showImage">
+                            <img class="showPokeDefault" src="" />
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2 class="namePoke capitalCase">
+                            Ipsum.
+                        </h2>
+                        <p class="categoryPoke">
+                        </p>
+                        <div>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row chart">
+                            <div class="ShowChartWrapper" >
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetchart()" >Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/chartCharacter.js">
+</script>
+<script>
+    function resetchart() {
+        document.querySelector(".ShowChartWrapper").innerHTML = ``
+    }
+    $.ajax({
+        url: "https://pokeapi.co/api/v2/pokemon/"
+    }).done(res => {
+        let i = 1
+        res.results.forEach(e => {
+            $("tbody").append(`
+                    <tr scope="row ">
+                        <td class="text-light">${i++}</td>
+                        <td class="text-light capitalCase">${e.name}</td>
+                        <td class="text-light">${e.url}</td>
+                        <td class="text-light">
+                                <button type="button" onClick="fetchPokemon(' https://pokeapi.co/api/v2/pokemon/${e.name}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                      Detail
+                                </button>
+
+                        </td>
+                    </tr>
+                `)
+        })
+    }).fail(err => console.log(err))
+
+    function fetchPokemon(url) {
+        
+        document.querySelector(".ShowChartWrapper").innerHTML = `<canvas width="400px" height="400px" id="showChart"></canvas>`
+      
+        $.ajax({
+            url
+        }).done(e => {
+            console.log(e)
+            $(".showPokeBack").attr("src", e.sprites.other.home.front_default)
+            $(".showPokeDefault").attr("src", e.sprites.other.home.front_shiny)
+            $(".namePoke").text(e.name)
+            $(".categoryPoke").text(e.types[0].type.name)
+            $(".modal-title").text(e.name)
+            showChart(e)
+            //sprite
+        })
+    }
+</script>

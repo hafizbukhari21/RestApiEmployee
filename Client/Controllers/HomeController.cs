@@ -28,6 +28,16 @@ namespace Client.Controllers
             return View();
         }
 
+        public IActionResult Content()
+        {
+            return View("Content");
+        }
+
+        public IActionResult Latihan()
+        {
+            return View("Latihan");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

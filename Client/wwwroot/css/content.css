@@ -1,0 +1,43 @@
+﻿.categoryWrapper {
+    
+    
+    overflow: hidden;
+}
+.Content{
+    margin-top:12vh;
+}
+
+.category {
+    position: relative;
+    overflow: hidden;
+  height:16vh;
+  transition-duration:0.5s;
+}
+.category:hover{
+    height:30vh;
+}
+
+.category>img{
+    width:100%;
+    position:relative;
+    z-index:3;
+
+}
+.cateDes {
+    padding-right:10px;
+    opacity:0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 15%, rgba(255,255,255,0) 100%);
+    width:100%;
+    text-align:end;
+    transition:.3s;
+
+}
+
+.category:hover > .cateDes{
+    opacity:1;
+}
+

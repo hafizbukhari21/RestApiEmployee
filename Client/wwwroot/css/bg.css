@@ -1,4 +1,6 @@
 ﻿
+
+
 .bgWrapper {
     width: 100vw;
     height: 100vh;
@@ -6,6 +8,7 @@
     position: fixed;
     justify-content: center;
     align-items: center;
+    z-index:-1;
     
 }
 .bg {
@@ -14,18 +17,17 @@
     height: 200vw;
     position: absolute;
     transform: rotateZ(0deg);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(3,0,113,1) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,88,113,1) 100%);
     animation: rotateBg 60s infinite linear;
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .bg-circle {
     margin: 1vw;
     border-radius: 30vw;
-    filter: blur(100px);
+    filter: blur(80px);
     opacity: .6;
 }
 
