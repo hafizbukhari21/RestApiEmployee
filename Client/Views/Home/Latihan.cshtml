@@ -324,7 +324,24 @@
             $(".namePoke").text(e.name)
             let name = ""
             e.types.forEach(e => {
-                name += `<span class="badge badge-primary">${e.type.name}</span> &nbsp;`
+                switch (e.type.name) {
+                    case 'fire':
+                        name += `<span class="badge badge-danger">${e.type.name}</span> &nbsp;`
+                        break;
+                    case 'grass':
+                        name += `<span class="badge badge-success">${e.type.name}</span> &nbsp;`
+                        break
+                    case 'water':
+                        name += `<span class="badge badge-primary">${e.type.name}</span> &nbsp;`
+                        break
+                    case 'bug':
+                        name += `<span class="badge badge-warning">${e.type.name}</span> &nbsp;`
+                        break
+                    default:
+                        name += `<span class="badge badge-secondary">${e.type.name}</span> &nbsp;`
+                        break
+                }
+                
                 $(".categoryPoke").html(name)
             })
            
