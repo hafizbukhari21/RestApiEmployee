@@ -100,6 +100,13 @@
     .abilityWrapper{
         
     }
+    .comparewrapper{
+        display:inline-block;
+        width:100%;
+     
+        justify-content:center;
+        text-align:center;
+    }
     
 </style>
 
@@ -205,6 +212,17 @@
                         <div class="row chart">
                             <div class="ShowChartWrapper" >
                             </div>
+                            <div class="comparewrapper" >
+                                <div class="dropdown show">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Compare Pokemon
+                                    </a>
+
+                                    <div class="dropdown-menu listCompare" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                        
                     </div>
@@ -225,7 +243,7 @@
 <script>
     
     let loadingSceene = document.querySelector(".loading");
-
+    let radar = null;
     
     function resetchart() {
         document.querySelector(".ShowChartWrapper").innerHTML = ``
@@ -249,6 +267,7 @@
                         </td>
                     </tr>
                 `)
+            $(".listCompare").append(`<a class="dropdown-item" onclick=addtoChart('https://pokeapi.co/api/v2/pokemon/${e.name}') href="#">${e.name}</a>`)
         })
     }).fail(err => console.log(err))
 
@@ -300,20 +319,59 @@
             $(".front-shiny").attr("src", e.sprites.front_shiny)
 
             $(".namePoke").text(e.name)
-            $(".categoryPoke").html(
-                `<span class="badge badge-primary">${e.types[0].type.name}</span>
-                    &nbsp;<span class="badge badge-secondary">${e.types[1].type.name}
-                    </span>`
-            )
-            showChart(e)
+            let name = ""
+            e.types.forEach(e => {
+                name += `<span class="badge badge-primary">${e.type.name}</span> &nbsp;`
+                $(".categoryPoke").html(name)
+            })
+           
+            radar =  showChart(e)
             
+            
+            
+
+          
             //sprite
         })
     }
+    function addtoChart(url) {
 
+        $.ajax({
+            url
+        }).done(e => {
 
+            radar.data.datasets.push(
+                {
+                    label: e.name,
+                    backgroundColor: RandomArray(),
+                    pointBackgroundColor: 'rgba(0,88,113,0.5)',
+                    pointBorderColor: 'rgba(0,88,113,0.5)',
+                    data: [
+                        e.stats[0].base_stat,
+                        e.stats[1].base_stat,
+                        e.stats[2].base_stat,
+                        e.stats[3].base_stat,
+                        e.stats[4].base_stat,
+                        e.stats[5].base_stat,
+                    ]
+                })
+
+            radar.update();
+        })
+
+       
+    }
+
+    function RandomArray() {
+        let arr = ["red", "green", "blue", "yellow", "white", "cyan"]
+
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    
     $(document).ready(function () {
         $('#poketable').DataTable();
     });
+
 
 </script>

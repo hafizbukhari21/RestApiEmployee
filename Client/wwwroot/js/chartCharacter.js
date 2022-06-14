@@ -45,5 +45,7 @@
        
         document.querySelector(".ShowChartWrapper").style.display="block"
     },1000)
-    
+
+    return radarChart;
 }
+
