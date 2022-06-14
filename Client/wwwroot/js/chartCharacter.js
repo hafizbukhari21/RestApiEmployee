@@ -7,7 +7,8 @@
         datasets: [{
             label: param.name,
             backgroundColor: "rgba(0,88,113,0.5)",
-
+            pointBackgroundColor: 'rgba(0,88,113,0.5)',
+            pointBorderColor: 'rgba(0,88,113,0.5)',
             data: [
               param.stats[0].base_stat,
               param.stats[1].base_stat,
@@ -32,7 +33,7 @@
                         display:false
                     },
                     suggestedMin: 0,
-                    suggestedMax:150
+                    suggestedMax:120
                 }
             }
 
