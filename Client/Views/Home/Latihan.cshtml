@@ -300,7 +300,9 @@
             $.ajax({
                 url: e.abilities[0].ability.url
             }).done(e => {
-                $(".abidetail1").text(e.effect_entries[0].effect)
+                let abi = e.effect_entries.filter(e => e.language.name === "en")
+                console.log(abi)
+                $(".abidetail1").text(abi[0].effect)
             })
 
             //abi2
@@ -310,7 +312,8 @@
             $.ajax({
                 url: e.abilities[1].ability.url
             }).done(e => {
-                $(".abidetail2").text(e.effect_entries[0].effect)
+                let abi = e.effect_entries.filter(e => e.language.name === "en")
+                $(".abidetail2").text(abi[0].effect)
             })
 
             $(".back-default").attr("src", e.sprites.back_default)
@@ -363,7 +366,17 @@
     }
 
     function RandomArray() {
-        let arr = ["red", "green", "blue", "yellow", "white", "cyan"]
+        let arr = [
+            "rgba(255, 55, 145, 0.27)",
+            "rgba(19, 179, 63, 0.27)",
+            "rgba(22, 24, 15, 0.27)",
+            "rgba(180, 130, 15, 0.62)",
+            "rgba(24, 175, 255, 0.8)",
+            "rgba(24, 20, 255, 0.57)",
+            "rgba(195, 20, 255, 0.57)",
+            "rgba(195, 101, 0, 0.57)",
+            "rgba(195, 236, 0, 0.57)"
+        ]
 
         return arr[Math.floor(Math.random() * arr.length)];
     }
