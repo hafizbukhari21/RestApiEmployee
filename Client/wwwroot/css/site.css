@@ -1,0 +1,104 @@
+﻿.bgImage{
+   position:absolute;
+}
+
+.item1 {
+    grid-area: myArea;
+    
+}
+.item7{
+    grid-area: area7;
+}
+
+h1{
+    font-size:50px;
+}
+
+.maincontent {
+    width: 30vw;
+    margin: auto;
+    position: absolute;
+    transition: 0.3s;
+}
+.item:hover .maincontent {
+    width: 35vw;
+}
+.item:hover .alterContent {
+    width: 20vw;
+}
+
+.alterContent {
+    width: 15vw;
+    margin: auto;
+    position: absolute;
+    transition:0.3s;
+}
+
+
+.item, .item7, .item1{
+    display:flex;
+    position:relative;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.keterangan {
+    position: absolute;
+    color: wheat;
+    text-align: left;
+    bottom: 0;
+    left: 0;
+    padding: 4px;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6951914554884453) 53%, rgba(0,0,0,0) 100%);
+    opacity:0;
+    transition:0.3s;
+}
+.item:hover >.keterangan{
+    opacity:1;
+}
+
+h4{
+    font-size:30px;
+}
+
+.keterangan>p{
+    font-size:10px;
+}
+
+
+.gridContainer {
+    height:60vh;
+    display: grid;
+    grid-template-areas:
+        'myArea myArea . . '
+        'myArea myArea . . '
+        '. . area7 area7 '
+        '. . area7 area7 ';
+    background-color:black;
+}
+
+.gridContainer > div, .mainitem {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px ;
+    font-size: 30px;
+}
+
+
+footer{
+  
+    position:relative;
+    z-index:4;
+    
+}
+.footerContent{
+    justify-content:center ;
+    text-align:center;
+}
+
+
+
+
+

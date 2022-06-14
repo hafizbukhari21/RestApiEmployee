@@ -17,7 +17,7 @@ namespace API.Controllers
         public ActionResult ResponseFormater(int statusCodeSuccess, int statusCodeFail, string statusSuccess, string statusFailed, int f)
         {
           
-            return f == 1 ?
+            return f > 0 ?
                  StatusCode(statusCodeSuccess, new { Status = statusSuccess, Message = messageObj }) :
                  StatusCode(statusCodeFail, new { Status = statusFailed, Message = messageObj });
              

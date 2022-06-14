@@ -14,9 +14,9 @@ namespace API.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly EmployeeRepository employeeRepository;
+        private readonly EmployeeRepositoryOld employeeRepository;
         private ResponseFormatter responseFormatter = new ResponseFormatter();
-        public EmployeesController(EmployeeRepository employeeRepository)
+        public EmployeesController(EmployeeRepositoryOld employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }
