@@ -97,6 +97,10 @@
     label{
         color:white;
     }
+    .abilityWrapper{
+        
+    }
+    
 </style>
 
 <div class="" style="margin-top:150px;">
@@ -131,12 +135,12 @@
                         }
                     </div>
                 </div>
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item showImage active" >
+                        <div class="carousel-item showImage active">
                             <img class="showPokeBack" src="" />
                         </div>
-                        
+
                         <div class="carousel-item showImage">
                             <img class="showPokeDefault" src="" />
                         </div>
@@ -149,34 +153,51 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                </div>
-                <div class="row">
-                    <div class="col">
+                    <div style="justify-content:center;text-align:center;">
                         <h2 class="namePoke capitalCase">
                             Ipsum.
                         </h2>
                         <p class="categoryPoke">
                         </p>
-                        <div class="hwPokeParent mt-4 ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                       
+                        <div class="hwPokeParent  ">
                             <h4 class="specTitle">Weight & Height</h4>
-                            <div class="row hwPoke ">
-                                <div class="">
-                                    <img src="~/assets/weight-scale.png" alt="Weight" />
-                                    <div class="weightPoke">100</div>
+                           
+                                    <span class="badge badge-primary pokeWeight">W-100</span>
+                                
+                                    <span class="badge badge-primary pokeHeight">H-100</span>
+                              
+                            
+                        </div>
+                        <div class="mt-2">
+                            <h4 class="specTitle">Ability</h4>
+                            <div class="abilityWrapper">
+                                <button type="button" class="btn btn-primary abi1" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
+                                <div id="demo" class="collapse abidetail1">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </div>
-                                <div class="">
-                                    <img src="~/assets/height.png" alt="Height" />
-                                    <div class="heightPoke">90</div>
+                                <button type="button" class="btn btn-secondary abi2" data-toggle="collapse" data-target="#demo2">Simple collapsible</button>
+                                <div id="demo2" class="collapse abidetail2">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </div>
                             </div>
                         </div>
+
                         <div class="icons Parent mt-2">
                             <h4 class="specTitle">Icons</h4>
                             <div class="iconImageWrapper">
-                                <img class ="iconImage back-default" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
-                                <img class ="iconImage back-shiny" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
-                                <img class ="iconImage front-default" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
-                                <img class ="iconImage front-shiny" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
+                                <img class="iconImage back-default" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
+                                <img class="iconImage back-shiny" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
+                                <img class="iconImage front-default" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
+                                <img class="iconImage front-shiny" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" />
                             </div>
                         </div>
                     </div>
@@ -242,8 +263,36 @@
                 loadingSceene.style.display = "none";
             }, 2000)
             console.log(e)
+
+            
+
             $(".showPokeBack").attr("src", e.sprites.other.home.front_default)
             $(".showPokeDefault").attr("src", e.sprites.other.home.front_shiny)
+
+
+            //weight height
+            $(".pokeWeight").text(`W-${e.weight}`)
+            $(".pokeHeight").text(`H-${e.height}`)
+
+            //abi1
+            $(".abi1").html(`
+                <span class="badge ">${e.abilities[0].ability.name}</span>
+            `)
+            $.ajax({
+                url: e.abilities[0].ability.url
+            }).done(e => {
+                $(".abidetail1").text(e.effect_entries[0].effect)
+            })
+
+            //abi2
+            $(".abi2").html(`
+                <span class="badge ">${e.abilities[1].ability.name}</span>
+            `)
+            $.ajax({
+                url: e.abilities[1].ability.url
+            }).done(e => {
+                $(".abidetail2").text(e.effect_entries[0].effect)
+            })
 
             $(".back-default").attr("src", e.sprites.back_default)
             $(".back-shiny").attr("src", e.sprites.back_shiny)
@@ -251,7 +300,11 @@
             $(".front-shiny").attr("src", e.sprites.front_shiny)
 
             $(".namePoke").text(e.name)
-            $(".categoryPoke").text(e.types[0].type.name )
+            $(".categoryPoke").html(
+                `<span class="badge badge-primary">${e.types[0].type.name}</span>
+                    &nbsp;<span class="badge badge-secondary">${e.types[1].type.name}
+                    </span>`
+            )
             showChart(e)
             
             //sprite
