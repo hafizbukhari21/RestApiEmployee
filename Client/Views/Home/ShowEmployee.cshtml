@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="" style="margin-top:150px;">
+    <table class="table table-striped" id="employeeTable" style="margin-top:20px">
+        <thead>
+            <th></th>
+        <th class="text-light">FirstName</th>
+        <th class="text-light"> Education</th>
+        <th class="text-light"> Email</th>
+        <th class="text-light"> Salary</th>
+        <th class="text-light">Gender</th>
+        </thead>
+        <tbody class="text-light">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    
+    $(document).ready(function () {
+        //$.ajax({
+        //    url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData"
+        //}).done(e => console.log(e))
+       let table =  $('#employeeTable').DataTable({
+            ajax: {
+                url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData",
+                dataType: "json",
+                dataSrc : ""
+            },
+           columns: [
+               { data: "firstName" },
+                {data:"firstName"},
+                { data:"univeristyName"},
+                {data:"email"},
+                {data:"salary"},
+                {data:"gender"},
+            ]
+       });
+
+        table.on("order.dt search.dt", () => {
+            let i = 1
+            table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw()
+
+
+
+    })
+</script>

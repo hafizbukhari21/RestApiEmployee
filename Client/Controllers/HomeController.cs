@@ -38,6 +38,11 @@ namespace Client.Controllers
             return View("Latihan");
         }
 
+        public IActionResult ShowEmployee()
+        {
+            return View("ShowEmployee");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

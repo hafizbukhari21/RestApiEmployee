@@ -113,7 +113,7 @@ namespace API.Repository.Data
                         BirthDate = emp.BirthDate,
                         Salary = emp.Salary,
                         Email = emp.Email,
-                        Degree = emp.account.profiling.education.degree,
+                        Degree = emp.account.profiling.education.degree.ToString(),
                         Gender = emp.Gender.ToString(),
                         GPA = emp.account.profiling.education.GPA,
                         UniveristyName = emp.account.profiling.education.university.nama

@@ -45,14 +45,14 @@ namespace API.Controllers
 
 
         }
-        [Authorize(Roles = "Direktur, Manager")]
+        //[Authorize(Roles = "Direktur, Manager")]
 
-        [HttpPost("GetRegisterData")]
+        [HttpGet("GetRegisterData")]
         public ActionResult<String> GetRegisterData()
         {
-            var payload = JWTConfig.JwtParse(employeeRepository.GetRegisterData(), _configuration);
+           /* var payload = JWTConfig.JwtParse(employeeRepository.GetRegisterData(), _configuration)*/;
 
-            return Ok(payload);
+            return Ok(employeeRepository.GetRegisterData());
         }
 
         [HttpGet("TestCors")]

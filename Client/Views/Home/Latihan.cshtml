@@ -4,9 +4,7 @@
 @{
 }
 
-@*some changes*@
 <style>
-    
     .showImage {
         
         text-align: center;
@@ -109,6 +107,9 @@
         justify-content:center;
         text-align:center;
     }
+    a{
+        color:white;
+    }
     
 </style>
 
@@ -120,7 +121,7 @@
         <th class="text-light"> URL</th>
         <th class="text-light">Action</th>
         </thead>
-        <tbody>
+        <tbody class="text-light">
         </tbody>
     </table>
 </div>
@@ -256,19 +257,19 @@
     }).done(res => {
         let i = 1
         res.results.forEach(e => {
-            $("tbody").append(`
-                    <tr scope="row ">
-                        <td class="text-light">${i++}</td>
-                        <td class="text-light capitalCase">${e.name}</td>
-                        <td class="text-light">${e.url}</td>
-                        <td class="text-light">
-                                <button type="button" onClick="fetchPokemon(' https://pokeapi.co/api/v2/pokemon/${e.name}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                      Detail
-                                </button>
+            //$("tbody").append(`
+            //        <tr scope="row ">
+            //            <td class="text-light">${i++}</td>
+            //            <td class="text-light capitalCase">${e.name}</td>
+            //            <td class="text-light">${e.url}</td>
+            //            <td class="text-light">
+            //                    <button type="button" onClick="fetchPokemon(' https://pokeapi.co/api/v2/pokemon/${e.name}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            //                          Detail
+            //                    </button>
 
-                        </td>
-                    </tr>
-                `)
+            //            </td>
+            //        </tr>
+            //    `)
             $(".listCompare").append(`<a class="dropdown-item" onclick=addtoChart('https://pokeapi.co/api/v2/pokemon/${e.name}') href="#">${e.name}</a>`)
         })
     }).fail(err => console.log(err))
@@ -402,7 +403,26 @@
 
     
     $(document).ready(function () {
-        $('#poketable').DataTable();
+        $('#poketable').DataTable({
+            "ajax": {
+                "url": "https://pokeapi.co/api/v2/pokemon/",
+                "dataType": "json",
+                "dataSrc" : "results"
+            },
+            "columns": [
+                { "data": "url" },
+                { "data": "name" },
+                { "data": "url" },
+                {
+                    "data": "url",
+                    "render": function(data, type, row, meta) {
+                        return `<button type="button" onClick="fetchPokemon('${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                      Detail
+                                </button>`;
+                    }
+                }
+            ]
+        });
     });
 
 
