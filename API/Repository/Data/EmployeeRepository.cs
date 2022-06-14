@@ -108,6 +108,7 @@ namespace API.Repository.Data
                 .Select(emp =>
                     new
                     {
+                        Nik = emp.NIK,
                         FirstName = emp.FirstName,
                         PhoneNumber = emp.Phone,
                         BirthDate = emp.BirthDate,

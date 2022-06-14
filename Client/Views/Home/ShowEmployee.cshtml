@@ -7,18 +7,80 @@
 <div class="" style="margin-top:150px;">
     <table class="table table-striped" id="employeeTable" style="margin-top:20px">
         <thead>
-            <th></th>
+        <th></th>
         <th class="text-light">FirstName</th>
         <th class="text-light"> Education</th>
         <th class="text-light"> Email</th>
         <th class="text-light"> Salary</th>
         <th class="text-light">Gender</th>
+        <th class="text-light">Action</th>
         </thead>
         <tbody class="text-light">
         </tbody>
     </table>
 </div>
 
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form id="updateForm" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">NIK</label>
+                            <input type="text" class="form-control nikForm" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="text" class="form-control emailForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Phone</label>
+                            <input type="tel" class="form-control phoneForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First Name</label>
+                            <input type="text" class="form-control firstNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name</label>
+                            <input type="text" class="form-control lastNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">BirthDate</label>
+                            <input type="datetime-local" class="form-control birthDateForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Salary</label>
+                            <input type="number" class="form-control salaryForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                       
+                        <button type="button" class="btn btn-primary update">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/updateEmployee.js"></script>
 <script>
     
     $(document).ready(function () {
@@ -38,6 +100,14 @@
                 {data:"email"},
                 {data:"salary"},
                 {data:"gender"},
+               {
+                   data: "nik",
+                   render: function (data, type, row, meta) {
+                       return `<button type="button" onClick="fetchUser('https://localhost:44360/api/Employees/${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                      Detail
+                                </button>`;
+                   }
+               }
             ]
        });
 
@@ -51,4 +121,24 @@
 
 
     })
+
+    function fetchUser(url) {
+        $.ajax({
+            url
+        }).done(e => {
+            console.log(e)
+            $(".emailForm").val(e.payload.email)
+            $(".nikForm").val(e.payload.nik)
+            $(".phoneForm").val(e.payload.phone)
+            $(".firstNameForm").val(e.payload.firstName)
+            $(".lastNameForm").val(e.payload.lastName)
+            $(".birthDateForm").val(e.payload.birthDate)
+            $(".salaryForm").val(e.payload.salary)
+            
+
+        })    
+    }
+
+    
+    
 </script>
