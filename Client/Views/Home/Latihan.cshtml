@@ -402,15 +402,15 @@
     }
 
     
-    $(document).ready(function () {
-        $('#poketable').DataTable({
+      $(document).ready(function () {
+          let table =$('#poketable').DataTable({
             "ajax": {
                 "url": "https://pokeapi.co/api/v2/pokemon/",
                 "dataType": "json",
                 "dataSrc" : "results"
             },
             "columns": [
-                { "data": "url" },
+                { data: "url" },
                 { "data": "name" },
                 { "data": "url" },
                 {
@@ -422,8 +422,17 @@
                     }
                 }
             ]
-        });
+          });
+
+          table.on("order.dt search.dt", () => {
+              let i = 1
+              table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                  this.data(i++);
+              });
+          }).draw()
     });
+    
+
 
 
 </script>
