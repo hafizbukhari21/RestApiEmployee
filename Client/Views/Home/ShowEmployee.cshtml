@@ -98,7 +98,12 @@
                 {data:"firstName"},
                 { data:"univeristyName"},
                 {data:"email"},
-                {data:"salary"},
+               {
+                   data: "salary",
+                   render: (data, type, row, meta) => {
+                       return `Rp. ${MonyeFormating(data)}` 
+                   }
+               },
                 {data:"gender"},
                {
                    data: "nik",
@@ -121,6 +126,11 @@
 
 
     })
+
+    function MonyeFormating(money) {
+        let moneyFormater = Intl.NumberFormat('en-Us')
+        return moneyFormater.format(money)
+    }
 
     function fetchUser(url) {
         $.ajax({
