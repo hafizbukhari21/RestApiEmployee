@@ -37,15 +37,18 @@ window.addEventListener('load', function () {
 }, false);
 
 function actionForm(forms, actionApi) {
+
     var validation = Array.prototype.filter.call(forms, function (form) {
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             event.stopPropagation();
             if (form.checkValidity() === false) {
-                alert("Isi Form Belum Sesuai")
+                
             }
             else {
+
                 actionApi()
+
             }
             form.classList.add('was-validated');
         }, false);
@@ -70,18 +73,30 @@ function insertData() {
 
     }
 
-    $.ajax({
-        url: "https://localhost:44360/api/baseController/EmployeeControllerV2/register" ,
-        type :"POST",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(data)
-    }).done(e => console.log(e)).fail(err => console.log(err))
+    if (
+        checkEmailValidity(
+            data.email,
+            ".emailfeedbackInsert",".emailInsert",
+            "Please Reformat your Email address"
+        ) &&
+        checkLength(data.password, 5, ".passwordFeedbackInsert", "Password Minimal 5 Karakter ") &&
+        checkPassword(data.password,".passwordFeedbackInsert")
+    ) {
+        $.ajax({
+            url: "https://localhost:44360/api/baseController/EmployeeControllerV2/register",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data)
+        }).done(e => console.log(e)).fail(err => console.log(err))
 
-    console.log(data)
-    setTimeout(() => {
-        table.ajax.reload()
-        
-    }, 3000)
+        console.log(data)
+        setTimeout(() => {
+            table.ajax.reload()
+
+        }, 3000)
+    }
+
+   
 }
 
 //insertButton.addEventListener("click", (e) => {
