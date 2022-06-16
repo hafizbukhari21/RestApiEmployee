@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interface;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,18 +28,21 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [EnableCors("AllowOrigin")]
         public ActionResult<Entity> post(Entity entity)
         {
             return Ok(repository.Insert(entity));
         }
 
         [HttpPatch]
+        [EnableCors("AllowOrigin")]
         public ActionResult<Entity> Update(Entity entity)
         {
             return Ok(repository.Update(entity));
         }
 
         [HttpDelete]
+        [EnableCors("AllowOrigin")]
         public ActionResult<Entity> Delete(Key key)
         {
             return Ok(repository.Delete(key));

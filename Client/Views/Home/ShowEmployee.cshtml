@@ -2,12 +2,19 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Show Employee";
+    Layout = "_LayoutSbAdm";
 }
 
+
 <div class="" style="margin-top:150px;">
+    <button class="btn btn-primary" data-target="#modalInsert" data-toggle="modal">
+        +
+    </button>
     <table class="table table-striped" id="employeeTable" style="margin-top:20px">
         <thead>
-        <th></th>
+
+        <th class="text-light">No</th>
         <th class="text-light">FirstName</th>
         <th class="text-light"> Education</th>
         <th class="text-light"> Email</th>
@@ -18,6 +25,187 @@
         <tbody class="text-light">
         </tbody>
     </table>
+</div>
+
+
+<div class="modal fade" id="modalInsert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="needs-validation" novalidate>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstName_i">Email address</label>
+                                    <input required type="email" class="form-control emailInsert" id="firstName_i" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Email
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstName_i">Password</label>
+                                    <input required type="password" class="form-control passwordInsert" id="firstName_i" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Email
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">First Name</label>
+                                    <input required type="text" class="form-control firstNameInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid FIrst Name
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Last Name</label>
+                                    <input required type="text" class="form-control lastNameInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Last Name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">GPA</label>
+                                    <input required type="text" class="form-control gpaInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Degree</label>
+                                    <input required type="text" class="form-control degreeInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Degree
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <label class="ml-3" for="exampleInputEmail1">Gender</label>
+                                </div>
+                                <div class="input-group ">
+
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+
+                                                <input class="form-check-input genderInsert" type="radio" name="exampleRadios" id="exampleRadios1" value="Male" checked>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input genderInsert" type="radio" name="exampleRadios" id="exampleRadios1" value="Female">
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">BirthDate</label>
+                                    <input required type="datetime-local" class="form-control birthDateInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Birth Date
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Salary</label>
+                                    <input required type="number" class="form-control salaryInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Salary
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect2">Pilih Kampus Anda</label>
+                                    <select required class="form-control universityIdInsert" id="exampleFormControlSelect2">
+                                        <option value="1">Binus</option>
+                                        <option value="2">UPH</option>
+                                        <option value="3">UI</option>
+
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Choose your Education
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Phone</label>
+                                    <input required type="number" class="form-control phoneInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <div class="invalid-feedback">
+                                        Invalid Phone Number
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        <button type="submit" class="btn btn-primary insert">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -31,124 +219,153 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form id="updateForm" method="post">
+                    <form id="updateForm" class="needs-validation-update-form" novalidate>
                         <div class="form-group">
                             <label for="exampleInputEmail1">NIK</label>
-                            <input type="text" class="form-control nikForm" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
+                            <input required type="text" class="form-control nikForm" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" class="form-control emailForm" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
+                        
                         <div class="form-group">
                             <label for="exampleInputEmail1">Phone</label>
-                            <input type="tel" class="form-control phoneForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input required type="tel" class="form-control phoneForm" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">First Name</label>
-                            <input type="text" class="form-control firstNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input required type="text" class="form-control firstNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Last Name</label>
-                            <input type="text" class="form-control lastNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input required type="text" class="form-control lastNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">BirthDate</label>
-                            <input type="datetime-local" class="form-control birthDateForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input  type="datetime-local" class="form-control birthDateForm" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Salary</label>
-                            <input type="number" class="form-control salaryForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input required type="number" class="form-control salaryForm" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
-                       
-                        <button type="button" class="btn btn-primary update">Update</button>
+
+
+                        <button type="submit" class="btn btn-primary update">Update</button>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                
+
             </div>
         </div>
     </div>
 </div>
 
-<script src="~/js/updateEmployee.js"></script>
-<script>
-    
-    $(document).ready(function () {
-        //$.ajax({
-        //    url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData"
-        //}).done(e => console.log(e))
-       let table =  $('#employeeTable').DataTable({
-            ajax: {
-                url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData",
-                dataType: "json",
-                dataSrc : ""
-            },
-           columns: [
-               { data: "firstName" },
-                {data:"firstName"},
-                { data:"univeristyName"},
-                {data:"email"},
-               {
-                   data: "salary",
-                   render: (data, type, row, meta) => {
-                       return `Rp. ${MonyeFormating(data)}` 
-                   }
-               },
-                {data:"gender"},
-               {
-                   data: "nik",
-                   render: function (data, type, row, meta) {
-                       return `<button type="button" onClick="fetchUser('https://localhost:44360/api/Employees/${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                      Detail
-                                </button>`;
-                   }
-               }
-            ]
-       });
+@section Scripts{
 
-        table.on("order.dt search.dt", () => {
-            let i = 1
-            table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
-                this.data(i++);
+    <script>
+        let table = null
+        $(document).ready(function () {
+
+            table = $('#employeeTable').DataTable({
+                ajax: {
+                    url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData",
+                    dataType: "json",
+                    dataSrc: "",
+                   
+                },
+                "processing": true,
+                "language": {
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+                },
+
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                columns: [
+                    { data: "firstName" },
+                    { data: "firstName" },
+                    { data: "univeristyName" },
+                    { data: "email" },
+                    {
+                        data: "salary",
+                        render: (data, type, row, meta) => {
+                            return `Rp. ${MonyeFormating(data)}`
+                        }
+                    },
+                    { data: "gender" },
+                    {
+                        data: "nik",
+                        render: function (data, type, row, meta) {
+                            return `<button type="button" onClick="fetchUser('https://localhost:44360/api/Employees/${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                          Detail
+                                    </button>
+                                    <button type="button" onClick="deleteUser('https://localhost:44360/api/baseController/EmployeeControllerV2/DeleteAlternative?nik=${data}')" class="btn btn-danger" >
+                                         Delete
+                                    </button>
+`;
+                        }
+                    }
+                ]
             });
-        }).draw()
+
+            table.on("order.dt search.dt", () => {
+                let i = 1
+                table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                    this.data(i++);
+                });
+            }).draw()
 
 
 
-    })
+        })
 
-    function MonyeFormating(money) {
-        let moneyFormater = Intl.NumberFormat('en-Us')
-        return moneyFormater.format(money)
-    }
+        function MonyeFormating(money) {
+            let moneyFormater = Intl.NumberFormat('en-Us')
+            return moneyFormater.format(money)
+        }
 
-    function fetchUser(url) {
-        $.ajax({
-            url
-        }).done(e => {
-            console.log(e)
-            $(".emailForm").val(e.payload.email)
-            $(".nikForm").val(e.payload.nik)
-            $(".phoneForm").val(e.payload.phone)
-            $(".firstNameForm").val(e.payload.firstName)
-            $(".lastNameForm").val(e.payload.lastName)
-            $(".birthDateForm").val(e.payload.birthDate)
-            $(".salaryForm").val(e.payload.salary)
-            
+        function deleteUser(url) {
+            $.ajax({
+                url,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
 
-        })    
-    }
+            }).done(e => {
+                console.log(e)
+                    table.ajax.reload()
+                alert("berhasil dihapus")
 
-    
-    
-</script>
+            })
+        }
+
+        function fetchUser(url) {
+            $.ajax({
+                url
+            }).done(e => {
+                console.log(e)
+                $(".emailForm").val(e.payload.email)
+                $(".nikForm").val(e.payload.nik)
+                $(".phoneForm").val(e.payload.phone)
+                $(".firstNameForm").val(e.payload.firstName)
+                $(".lastNameForm").val(e.payload.lastName)
+                $(".birthDateForm").val(e.payload.birthDate)
+                $(".salaryForm").val(e.payload.salary)
+
+
+            })
+        }
+
+
+
+
+    </script>
+    <script src="~/js/updateEmployee.js"></script>
+}
+
+

@@ -11,6 +11,8 @@ using API.ViewModel;
 using API.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+
 
 namespace API.Controllers
 {
@@ -31,6 +33,7 @@ namespace API.Controllers
 
 
         [HttpPost("register")]
+        [EnableCors("AllowOrigin")]
         public ActionResult Register(RegisterPegawaiVM registerPegawaiVM)
         {
 
@@ -62,6 +65,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("DeleteAlternative")]
+        [EnableCors("AllowOrigin")]
         public ActionResult DeleteAlter(string nik)
         {
             return Ok(employeeRepository.DeleteAlter(nik));
