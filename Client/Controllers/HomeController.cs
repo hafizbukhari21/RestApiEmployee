@@ -43,6 +43,11 @@ namespace Client.Controllers
             return View("ShowEmployee");
         }
 
+        public IActionResult LatihanChart()
+        {
+            return View("LatihanChart");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

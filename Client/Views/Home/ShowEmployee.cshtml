@@ -6,47 +6,59 @@
     Layout = "_LayoutSbAdm";
 }
 
+<style>
+   
+</style>
 
 <div class="" style="margin-top:150px;">
-    <button class="btn btn-primary" data-target="#modalInsert" data-toggle="modal">
-        +
-    </button>
-    <table class="table table-striped" id="employeeTable" style="margin-top:20px">
-        <thead>
-
-        <th class="text-light">No</th>
-        <th class="text-light">FirstName</th>
-        <th class="text-light"> Education</th>
-        <th class="text-light"> Email</th>
-        <th class="text-light"> Salary</th>
-        <th class="text-light">Gender</th>
-        <th class="text-light">Action</th>
-        </thead>
-        <tbody class="text-light">
-        </tbody>
-    </table>
+    <div class="card p-4">
+        <button class="btn btn-primary mb-4" data-target="#modalInsert" data-toggle="modal">
+            + Add
+        </button>
+        <table class="table table-striped" id="employeeTable" style="margin-top:20px">
+            <thead>
+            <th class=""></th>
+            <th class="">No</th>
+            <th class="">Name</th>
+            <th class=""> Education</th>
+            <th class=""> Email</th>
+            <th class=""> Salary</th>
+            <th class="">Gender</th>
+            <th class="">Action</th>
+            </thead>
+            <tbody class="">
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
 <div class="modal fade" id="modalInsert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="needs-validation" novalidate>
+            <form class="needs-validation" novalidate>
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Insert Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="loadingWrapper">
+                        <div>
+                            @{
+                                Html.RenderPartial("~/Views/Home/LoadingSceene.cshtml");
+                            }
+                        </div>
+                    </div>
+                    <div>
 
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="firstName_i">Email address</label>
                                     <input required type="email" class="form-control emailInsert " id="firstName_i" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback emailfeedbackInsert">
                                         Invalid Email
                                     </div>
@@ -56,9 +68,8 @@
                                 <div class="form-group">
                                     <label for="firstName_i">Password</label>
                                     <input required type="text" class="form-control passwordInsert" id="firstName_i" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback passwordFeedbackInsert">
-                                        Invalid Email
+                                        Invalid Password
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +80,6 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">First Name</label>
                                     <input required type="text" class="form-control firstNameInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback">
                                         Invalid FIrst Name
                                     </div>
@@ -79,7 +89,6 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Last Name</label>
                                     <input required type="text" class="form-control lastNameInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback">
                                         Invalid Last Name
                                     </div>
@@ -92,17 +101,25 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">GPA</label>
                                     <input required type="text" class="form-control gpaInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Degree</label>
+                                @*<div class="form-group">
                                     <input required type="text" class="form-control degreeInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback">
                                         Invalid Degree
                                     </div>
+                                </div>*@
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Degree</label>
+
+                                    <select required class="form-control degreeInsert" id="exampleFormControlSelect2">
+                                        <option value="D3">D3</option>
+                                        <option value="D4">D4</option>
+                                        <option value="S1">S1</option>
+                                        <option value="S2">S2</option>
+                                        <option value="S3">S3</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +136,7 @@
                                         <div class="col">
                                             <div class="form-check">
 
-                                                <input class="form-check-input genderInsert" type="radio" name="exampleRadios" id="exampleRadios1" value="Male" checked>
+                                                <input class="form-check-input genderInsert" type="radio" name="genderInsert" id="exampleRadios1" value="Male" checked>
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     Male
                                                 </label>
@@ -127,7 +144,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-check">
-                                                <input class="form-check-input genderInsert" type="radio" name="exampleRadios" id="exampleRadios1" value="Female">
+                                                <input class="form-check-input genderInsert" type="radio" name="genderInsert" id="exampleRadios1" value="Female">
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     Female
                                                 </label>
@@ -142,8 +159,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">BirthDate</label>
-                                    <input required type="datetime-local" class="form-control birthDateInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <input required type="date" class="form-control birthDateInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
                                     <div class="invalid-feedback">
                                         Invalid Birth Date
                                     </div>
@@ -156,7 +172,6 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Salary</label>
                                     <input required type="number" class="form-control salaryInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback">
                                         Invalid Salary
                                     </div>
@@ -182,85 +197,108 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Phone</label>
                                     <input required type="number" class="form-control phoneInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <div class="invalid-feedback">
                                         Invalid Phone Number
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
 
 
-
-
-
-
-                        <button type="submit" class="btn btn-primary insert">Update</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary insert">Insert</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-            </div>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
 
+
+
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form id="updateForm" class="needs-validation-update-form" novalidate>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">NIK</label>
-                            <input required type="text" class="form-control nikForm" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <form id="updateForm" class="needs-validation-update-form" novalidate>
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">NIK</label>
+                                    <input required type="text" class="form-control nikForm" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email</label>
+                                    <input required type="text" class="form-control emailForm" id="exampleInputEmail1" aria-describedby="emailHelp" disabled>
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Phone</label>
-                            <input required type="tel" class="form-control phoneForm" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Phone</label>
+                                    <input required type="tel" class="form-control phoneForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">First Name</label>
+                                    <input required type="text" class="form-control firstNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">First Name</label>
-                            <input required type="text" class="form-control firstNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Last Name</label>
+                                    <input required type="text" class="form-control lastNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">BirthDate</label>
+                                    <input type="date" class="form-control birthDateForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Last Name</label>
-                            <input required type="text" class="form-control lastNameForm" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">BirthDate</label>
-                            <input  type="datetime-local" class="form-control birthDateForm" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Salary</label>
                             <input required type="number" class="form-control salaryForm" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary update">Update</button>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-            </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary update">Update</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -268,14 +306,54 @@
 @section Scripts{
 
     <script>
+        $('#modalInsert').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+
+       
+
+
         let table = null
+        let loading = document.querySelector(".loadingWrapper")
+        loading.style.display = "none"
+
+        //update Table User
+        function format(d) {
+            return `
+                        <table class="table">
+                            <thead>
+                                <th scope="col">NIK</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Degree</th>
+                                <th scope="col">GPA</th>
+                                <th scope="col">University name</th>
+                            <thead>
+                            <tbody>
+                            <tr>
+                                <td>${d.nik}</td>
+                                <td>${d.firstName}</td>
+                                <td>${d.lastName}</td>
+                                <td>${d.phone}</td>
+                                <td>${d.email}</td>
+                                <td>${d.degree}</td>
+                                <td>${d.gpa}</td>
+                                <td>${d.univeristyName}</td>
+                            </tr>
+                            </tbody>
+                        </table>                    
+
+                `
+        }
         $(document).ready(function () {
 
             table = $('#employeeTable').DataTable({
                 ajax: {
                     url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData",
                     dataType: "json",
-                    dataSrc: "",
+                    dataSrc: "", 
                    
                 },
                 "processing": true,
@@ -283,13 +361,33 @@
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
                 },
 
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
+                dom: 'lBfrtip',
+                buttons: {
+                    "name": "primary",
+                    "buttons": [
+                        { extend: 'copy', className:'btn btn-primary glyphicon glyphicon-duplicate'},
+                        { extend: 'csv', className:'btn btn-primary glyphicon glyphicon-duplicate'},
+                        { extend: 'excel', className:'btn btn-primary glyphicon glyphicon-duplicate'},
+                        { extend: 'pdf', className:'btn btn-primary glyphicon glyphicon-duplicate'},
+                        { extend: 'print', className:'btn btn-primary glyphicon glyphicon-duplicate'},
+                    ]
+                       
+                },
                 columns: [
+                    {
+                        className: "dt-control",
+                        orderable: false,
+                        data: null,
+                        defaultContent:''
+                    },
                     { data: "firstName" },
-                    { data: "firstName" },
+                    {
+                        data: "firstName",
+                        render: (data, type, row, meta) => {
+                            console.log(row)
+                            return `${data} ${row.lastName} `
+                        }
+                    },
                     { data: "univeristyName" },
                     { data: "email" },
                     {
@@ -305,7 +403,7 @@
                             return `<button type="button" onClick="fetchUser('https://localhost:44360/api/Employees/${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                                           Detail
                                     </button>
-                                    <button type="button" onClick="deleteUser('https://localhost:44360/api/baseController/EmployeeControllerV2/DeleteAlternative?nik=${data}')" class="btn btn-danger" >
+                                    <button type="button" onClick="deleteUser('https://localhost:44360/api/baseController/EmployeeControllerV2/DeleteAlternative?nik=${data}','${row.firstName+" "+row.lastName}')" class="btn btn-danger" >
                                          Delete
                                     </button>
 `;
@@ -314,9 +412,21 @@
                 ]
             });
 
+
+            $("#employeeTable tbody").on("click", "td.dt-control", function () {
+                let tr = $(this).closest('tr')
+                let row = table.row(tr)
+                if (row.child.isShown()) {
+                    row.child.hide()
+                    tr.removeClass("shown")
+                } else {
+                    row.child(format(row.data())).show()
+                    tr.addClass("shown")
+                }
+            })
             table.on("order.dt search.dt", () => {
                 let i = 1
-                table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                table.cells(null, 1, { search: 'applied', order: 'applied' }).every(function (cell) {
                     this.data(i++);
                 });
             }).draw()
@@ -330,20 +440,43 @@
             return moneyFormater.format(money)
         }
 
-        function deleteUser(url) {
-            $.ajax({
-                url,
-                type: "DELETE",
-                contentType: "application/json; charset=utf-8",
+        //Delete
+        function deleteUser(url, nama) {
+            //if (confirm(`Apakah anda yakin ingin mengapus data ${nama}`)) DoDelete(url)
 
-            }).done(e => {
-                console.log(e)
-                    table.ajax.reload()
-                alert("berhasil dihapus")
-
+            Swal.fire({
+                title: `Delete ${nama}`,
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    DoDelete(url)
+                    Swal.fire('Deleted!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
             })
+
+            function DoDelete(url) {
+                $.ajax({
+                    url,
+                    type: "DELETE",
+                    contentType: "application/json; charset=utf-8",
+
+                }).done(e => {
+                    console.log(e)
+                    table.ajax.reload()
+                   
+
+                })
+            }
         }
 
+
+        //show detail user
         function fetchUser(url) {
             $.ajax({
                 url
@@ -354,14 +487,40 @@
                 $(".phoneForm").val(e.payload.phone)
                 $(".firstNameForm").val(e.payload.firstName)
                 $(".lastNameForm").val(e.payload.lastName)
-                $(".birthDateForm").val(e.payload.birthDate)
+                $(".birthDateForm").val(moment(e.payload.birthDate).format("YYYY-MM-DD").toString())
                 $(".salaryForm").val(e.payload.salary)
-
+                
+              
 
             })
         }
 
+        function degreeConvert(univ) {
+            switch (univ) {
+                case 0:
+                    return "D3"
+                    break
+                case 1:
+                    return "D4"
+                    break
+                case 2:
+                    return "S1"
+                    break
+                case 3:
+                    return "S2"
+                    break
+                case 4:
+                    return "S3"
+                    break
+                
+            }
+        }
 
+        function EducationPart(edu) {
+            edu.forEach(e => {
+                console.log(e)
+            })
+        }
 
 
     </script>

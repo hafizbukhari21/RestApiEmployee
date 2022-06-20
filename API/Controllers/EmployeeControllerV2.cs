@@ -50,6 +50,13 @@ namespace API.Controllers
         }
         //[Authorize(Roles = "Direktur, Manager")]
 
+        [HttpPost("updateUniv")]
+        [EnableCors("AllowOrigin")]
+        public ActionResult UpdateUniv(UpdateUnivVM updateUniv)
+        {
+            return Ok(employeeRepository.UpdateEducation(updateUniv));
+        }
+
         [HttpGet("GetRegisterData")]
         public ActionResult<String> GetRegisterData()
         {
@@ -71,7 +78,14 @@ namespace API.Controllers
             return Ok(employeeRepository.DeleteAlter(nik));
         }
 
-        
+        [HttpPost("withPost")]
+        [EnableCors("AllowOrigin")]
+        public ActionResult UpdateWithPost(Employee entity)
+        {
+            return Ok(employeeRepository.Update(entity));
+        }
+
+
 
         //[HttpGet("mailtest")]
         //public ActionResult MailTest()
@@ -83,7 +97,7 @@ namespace API.Controllers
         //}
 
 
-    
-        
+
+
     }
 }

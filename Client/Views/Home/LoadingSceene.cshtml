@@ -1,6 +1,6 @@
 ﻿
 
-<style>
+@*<style>
     body {
         background: #102131;
     }
@@ -16,16 +16,17 @@
         left: 0;
         right: 0;
     }
-</style>
+</style>*@
 
-<canvas id="loading" width="200" height="200"></canvas>
+<canvas class="loading" width="200" height="200"></canvas>
 
 
 <script>
+    
     var points = [],
         velocity2 = 5, // velocity squared
         canvas =
-            document.getElementById('loading'),
+            document.querySelector('.loading'),
         context = canvas.getContext('2d'),
         radius = 5,
         boundaryX = 200,

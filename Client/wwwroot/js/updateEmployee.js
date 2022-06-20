@@ -1,21 +1,29 @@
 ﻿
 let updateButton = document.querySelector(".update")
 
+//Update
 function updateData() {
+  
     let data = {
         nik: document.querySelector(".nikForm").value,
         firstName: document.querySelector(".firstNameForm").value,
         lastName: document.querySelector(".lastNameForm").value,
         phone: document.querySelector(".phoneForm").value,
         birthDate: document.querySelector(".birthDateForm").value,
-        salary: document.querySelector(".salaryForm").value
+        salary: document.querySelector(".salaryForm").value,
+        email: document.querySelector(".emailForm").value,
+       
     }
+  
     $.ajax({
-        url: "https://localhost:44360/api/baseController/EmployeeControllerV2",
-        type: "PATCH",
+        url: "https://localhost:44360/api/baseController/EmployeeControllerV2/withPost",
+        type: "POST",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(data)
-    }).done(e => console.log(e)).fail(err => console.log(err))
+    }).done(e => {
+        console.log(e)
+        Swal.fire('Berhasil Update Data!', '', 'success')
+    }).fail(err => console.log(err))
 
     
     setTimeout(() => {
@@ -56,8 +64,10 @@ function actionForm(forms, actionApi) {
 }
 
 
-
+//Insert
 function insertData() {
+    
+ 
     let data = {
         firstName: document.querySelector(".firstNameInsert").value,
         lastName: document.querySelector(".lastNameInsert").value,
@@ -65,7 +75,7 @@ function insertData() {
         birthDate: document.querySelector(".birthDateInsert").value,
         salary: document.querySelector(".salaryInsert").value,
         email: document.querySelector(".emailInsert").value,
-        gender: document.querySelector(".genderInsert").value,
+        gender: document.querySelector(`input[name="genderInsert"]:checked`).value,
         gpa: document.querySelector(".gpaInsert").value,
         degree: document.querySelector(".degreeInsert").value,
         password: document.querySelector(".passwordInsert").value,
@@ -73,28 +83,32 @@ function insertData() {
 
     }
 
+    console.log(data)
+
     if (
         checkEmailValidity(
             data.email,
             ".emailfeedbackInsert",".emailInsert",
             "Please Reformat your Email address"
-        ) &&
-        checkLength(data.password, 5, ".passwordFeedbackInsert", "Password Minimal 5 Karakter ") &&
-        checkPassword(data.password,".passwordFeedbackInsert")
+        ) && checkPassword(data.password,".passwordFeedbackInsert")
     ) {
-        $.ajax({
-            url: "https://localhost:44360/api/baseController/EmployeeControllerV2/register",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(data)
-        }).done(e => console.log(e)).fail(err => console.log(err))
+        loading.style.display = "flex"
+            $.ajax({
+                url: "https://localhost:44360/api/baseController/EmployeeControllerV2/register",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data)
+            }).done(e => {
+                loading.style.display = "none"
+                Swal.fire('Berhasil Menambahkan Data', '', 'success')
+                console.log(e)
+            }).fail(err => console.log(err))
 
-        console.log(data)
-        setTimeout(() => {
-            table.ajax.reload()
-
-        }, 3000)
-    }
+            console.log(data)
+            setTimeout(() => {
+                table.ajax.reload()
+            }, 3000)
+       }
 
    
 }

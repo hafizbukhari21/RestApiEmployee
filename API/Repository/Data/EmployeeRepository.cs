@@ -11,10 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository.Data
 {
-    public class EmployeeRepository : GeneralRepository<MyContext,Employee,string>
+    public class EmployeeRepository : GeneralRepository<MyContext, Employee, string>
     {
         public MyContext context;
-        
+
         public EmployeeRepository(MyContext myContext) : base(myContext)
         {
             this.context = myContext;
@@ -26,14 +26,14 @@ namespace API.Repository.Data
             UniversityRepository universityRepository = new UniversityRepository(context);
             Employee emp = new Employee
             {
-                NIK =DateTime.Now.ToString("MMddyyyy")+ GetAutoIncrementConvertString(),
+                NIK = DateTime.Now.ToString("MMddyyyy") + GetAutoIncrementConvertString(),
                 FirstName = registerPegawaiVM.FirstName,
                 LastName = registerPegawaiVM.LastName,
                 Phone = registerPegawaiVM.Phone,
                 BirthDate = registerPegawaiVM.BirthDate,
                 Salary = registerPegawaiVM.Salary,
                 Email = registerPegawaiVM.Email,
-                Gender = (Gender)Enum.Parse(typeof(Gender),registerPegawaiVM.Gender),
+                Gender = (Gender)Enum.Parse(typeof(Gender), registerPegawaiVM.Gender),
                 account = new Account
                 {
                     password = Tools.BCryptHasing(registerPegawaiVM.password),
@@ -59,12 +59,12 @@ namespace API.Repository.Data
             return context.SaveChanges();
         }
 
-        
+
 
         public bool EmailIsUsed(string Email)
         {
             Employee emp = context.Employees.FirstOrDefault(emp => emp.Email == Email);
-            return emp != null; 
+            return emp != null;
         }
 
         public bool PhoneIsUsed(string phone)
@@ -81,26 +81,28 @@ namespace API.Repository.Data
         //    else if (BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, emCkh.account.password)) return Variable.PASSWORD_NOT_FOUND;//password tidak match
 
         //    else return 500;
-            
+
         //}
 
         public string GetAutoIncrementConvertString()
         {
             Employee emp = context.Employees.ToList().LastOrDefault();
-            if(emp == null) return "0000";
+            if (emp == null) return "0000";
 
             string currentString = emp.NIK.Substring(emp.NIK.Length - 4);
             int currentNIK = Int32.Parse(currentString);
 
             currentNIK++;
             if (currentNIK >= 1 && currentNIK <= 9) return "000" + currentNIK.ToString();
-            else if(currentNIK >= 10 && currentNIK <= 99) return "00" + currentNIK.ToString();
+            else if (currentNIK >= 10 && currentNIK <= 99) return "00" + currentNIK.ToString();
             else if (currentNIK >= 100 && currentNIK <= 999) return "0" + currentNIK.ToString();
-            return  currentNIK.ToString();
+            return currentNIK.ToString();
 
 
-            
+
         }
+
+
 
         public Object GetRegisterData()
         {
@@ -110,6 +112,7 @@ namespace API.Repository.Data
                     {
                         Nik = emp.NIK,
                         FirstName = emp.FirstName,
+                        LastName = emp.LastName,
                         PhoneNumber = emp.Phone,
                         BirthDate = emp.BirthDate,
                         Salary = emp.Salary,
@@ -120,8 +123,23 @@ namespace API.Repository.Data
                         UniveristyName = emp.account.profiling.education.university.nama
                     }
                 ).ToList();
-            
+
         }
+
+        public int UpdateEducation(UpdateUnivVM updateUniv)
+        {
+            Profiling prof = context.Profilings.Find(updateUniv.nik);
+
+            Education edu = context.Education.Find(prof.education.id);
+            edu.GPA = updateUniv.gpa;
+            edu.degree = (Degree)Enum.Parse(typeof(Degree), updateUniv.degree);
+
+            context.Education.Update(edu);
+
+            return context.SaveChanges();
+
+        }  
+
 
         public int DeleteAlter(string nik)
         {
@@ -136,7 +154,7 @@ namespace API.Repository.Data
             return context.SaveChanges();
         }
 
-
+        
         public static Models.Degree CheckDegree(int degree)
         {
             switch (degree)

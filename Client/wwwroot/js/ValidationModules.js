@@ -2,9 +2,9 @@
     let messageElement = document.querySelector(messageElement_class)
     let element = document.querySelector(element_class)
     if (!email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-        //element.classList.add("is-invalid")
-        //element.classList.remove("is-valid")
-        //document.querySelector(".emailInsert").classList.add("is-invalid")
+        element.classList.remove("is-valid")
+        element.classList.add("is-invalid")
+        document.querySelector(".emailInsert").classList.add("is-invalid")
         messageElement.style.display = "block"
         messageElement.innerHTML = message
         return false

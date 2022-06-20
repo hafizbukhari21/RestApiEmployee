@@ -27,6 +27,12 @@ namespace API.Controllers
             return Ok(repository.get());
         }
 
+        [HttpGet("{param}")]
+        public ActionResult<Entity> Get(Key param)
+        {
+            return Ok(repository.Get(param));
+        }
+
         [HttpPost]
         [EnableCors("AllowOrigin")]
         public ActionResult<Entity> post(Entity entity)

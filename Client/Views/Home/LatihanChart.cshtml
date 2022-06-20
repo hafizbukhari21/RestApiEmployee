@@ -1,0 +1,171 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Latihan Chart";
+    Layout = "_LayoutSbAdm";
+}
+
+<div class="parent" >
+    <div class="card">
+        <div class="card-body">
+            <div class="row ">
+
+                <div class="col card p-3" id="wrapper"  style="border-color:transparent" >
+                    <h3>
+                        Gender  <a href="#" target="_blank" class="btn btn-primary " id="downloadChartGender">Export</a>
+                    </h3>
+                    <canvas width=200 height=200 id="ChartGender"></canvas>
+
+                </div>
+                <div class="col-8 card  p-3" style="border-color:transparent">
+                    <h3>
+                        Degree  <a href="#" target="_blank" class="btn btn-primary " id="downloadChartDegree">Export</a>
+                    </h3>
+                    <div id="wrapper ">
+                        <canvas width=400 height=400 id="ChartDegree"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+
+@section Scripts{ 
+    <script>
+       
+            
+       
+
+        $(document).ready(() => {
+            GenderChart()
+            
+            DegreeChart()
+        })
+
+
+        function GenderChart() {
+            let marksCanvas = document.getElementById("ChartGender");
+            let totMale = 0
+            let totFemale = 0
+            $.ajax({
+                url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData"
+            }).then((e) => {
+                totMale = [...e.filter(emp => emp.gender === "Male")].length
+                totFemale = [...e.filter(emp => emp.gender === "Female")].length
+                RenderChart(totMale, totFemale)
+               
+            })
+
+            function RenderChart(male, female) {
+                const data = {
+                    labels: [
+                        'Female',
+                        'Male',
+
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [female, male],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)'
+
+                        ],
+                        hoverOffset: 4
+                    }]
+                };
+
+
+                new Chart(marksCanvas, {
+                    type: 'pie',
+                    data: data,
+                })
+            }
+
+            let exportGender = document.querySelector("#downloadChartGender")
+            exportGender.addEventListener("click", () => {
+                let url_base64 = document.getElementById("ChartGender").toDataURL("image")
+                exportGender.href = url_base64
+
+            })
+        }
+
+        function DegreeChart() {
+            let marksCanvas = document.getElementById("ChartDegree");
+
+            let totD3 = 0
+            let totD4 = 0 
+            let totS1 = 0 
+            let totS2 = 0 
+            let totS3 = 0 
+            $.ajax({
+                url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData"
+            }).then((e) => {
+                totD3 = [...e.filter(emp => emp.degree === "D3")].length
+                totD4 = [...e.filter(emp => emp.degree === "D4")].length
+                totS1 = [...e.filter(emp => emp.degree === "S1")].length
+                totS2 = [...e.filter(emp => emp.degree === "S2")].length
+                totS3 = [...e.filter(emp => emp.degree === "S3")].length
+                RenderChart(totD3,totD4, totS1, totS2, totS3)
+                console.log(e)
+
+               
+            })
+
+            function RenderChart(d3,d4, s1, s2, s3) {
+                const data = {
+                    labels: ["D3","D4","S1","S2","S3"],
+                    datasets: [{
+                        label: 'Degree',
+                        data: [d3,d4, s1, s2, s3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)'
+                           
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+
+                new Chart(marksCanvas, {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        maintainAspectRatio:false
+
+                    }
+                })
+
+                let exportGender = document.querySelector("#downloadChartDegree")
+                exportGender.addEventListener("click", () => {
+                    let url_base64 = document.getElementById("ChartDegree").toDataURL("image")
+                    exportGender.href = url_base64
+
+                })
+
+            }
+        }
+
+    </script>
+
+}
+
