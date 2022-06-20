@@ -5,27 +5,54 @@
     ViewData["Title"] = "Latihan Chart";
     Layout = "_LayoutSbAdm";
 }
+<style>
+   
+</style>
 
 <div class="parent" >
     <div class="card">
         <div class="card-body">
+            <h4 class="badge badge-primary " style="font-size:30px">
+                 Chart Js
+            </h4>
             <div class="row ">
 
-                <div class="col card p-3" id="wrapper"  style="border-color:transparent" >
+                <div class="col card " id="wrapper" style="border-color:transparent">
                     <h3>
-                        Gender  <a href="#" target="_blank" class="btn btn-primary " id="downloadChartGender">Export</a>
+                        Gender  <a download="gender" href="#" target="_blank" class="btn btn-primary " id="downloadChartGender">Export</a>
                     </h3>
                     <canvas width=200 height=200 id="ChartGender"></canvas>
 
                 </div>
-                <div class="col-8 card  p-3" style="border-color:transparent">
+                <div class="col-8 card  " style="border-color:transparent">
                     <h3>
-                        Degree  <a href="#" target="_blank" class="btn btn-primary " id="downloadChartDegree">Export</a>
+                        Degree  <a download="degree" href="#" target="_blank" class="btn btn-primary " id="downloadChartDegree">Export</a>
                     </h3>
                     <div id="wrapper ">
                         <canvas width=400 height=400 id="ChartDegree"></canvas>
                     </div>
 
+                </div>
+            </div>
+            <h4 class="badge badge-primary mt-5" style="font-size:30px">
+                Apex Chart
+            </h4>
+            <div class="row">
+                <div class="col">
+                    <h3>
+                        Gender
+                    </h3>
+                    <div id="ApexChartGender">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>
+                        Degree
+                    </h3>
+                    <div id="ApexChartDegree">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,8 +71,10 @@
             GenderChart()
             
             DegreeChart()
+            
         })
 
+        
 
         function GenderChart() {
             let marksCanvas = document.getElementById("ChartGender");
@@ -57,8 +86,57 @@
                 totMale = [...e.filter(emp => emp.gender === "Male")].length
                 totFemale = [...e.filter(emp => emp.gender === "Female")].length
                 RenderChart(totMale, totFemale)
+                ApexGenderChart(totFemale, totMale)
                
             })
+
+            function ApexGenderChart(male,female) {
+                var options = {
+                    chart: {
+                        type: 'donut',
+                        toolbar: {
+                            show: true,
+                            offsetX: 0,
+                            offsetY: 0,
+                            tools: {
+                                download: true,
+                                selection: true,
+                                zoom: true,
+                                zoomin: true,
+                                zoomout: true,
+                                pan: true,
+                                reset: true | '<img src="/static/icons/reset.png" width="20">',
+                                customIcons: []
+                            },
+                            export: {
+                                csv: {
+                                    filename: undefined,
+                                    columnDelimiter: ',',
+                                    headerCategory: 'category',
+                                    headerValue: 'value',
+                                    dateFormatter(timestamp) {
+                                        return new Date(timestamp).toDateString()
+                                    }
+                                },
+                                svg: {
+                                    filename: undefined,
+                                },
+                                png: {
+                                    filename: undefined,
+                                }
+                            },
+                            autoSelected: 'zoom'
+                        },
+                    },
+                    series: [female, male],
+                    labels: ['Female', 'Male']
+                    
+                }
+
+                var chart = new ApexCharts(document.querySelector("#ApexChartGender"), options);
+
+                chart.render();
+            }
 
             function RenderChart(male, female) {
                 const data = {
@@ -81,8 +159,21 @@
 
 
                 new Chart(marksCanvas, {
-                    type: 'pie',
+                    type: 'doughnut',
                     data: data,
+                    options: {
+                        plugins: {
+                            labels: {
+                                render: 'percentage',
+                                fontColor: 'white',
+                                fontStyle: 'bolder',
+                                
+                            }
+                        }
+
+                    },
+                    
+
                 })
             }
 
@@ -90,6 +181,7 @@
             exportGender.addEventListener("click", () => {
                 let url_base64 = document.getElementById("ChartGender").toDataURL("image")
                 exportGender.href = url_base64
+                
 
             })
         }
@@ -113,8 +205,29 @@
                 RenderChart(totD3,totD4, totS1, totS2, totS3)
                 console.log(e)
 
-               
+                ApexRenderChart(totD3, totD4, totS1, totS2, totS3)
             })
+
+            function ApexRenderChart(totD3, totD4, totS1, totS2, totS3) {
+                var options = {
+                    chart: {
+                        type: 'bar',
+                       
+                    },
+                    series: [
+                        {
+                            name: 'Degree',
+                            data: [totD3, totD4, totS1, totS2, totS3]
+                        }
+                    ],
+                    xaxis: {
+                        categories: ["D3","D4","S1","S2","S3"]
+                    }
+                }
+
+                var chart = new ApexCharts(document.querySelector('#ApexChartDegree'), options)
+                chart.render()
+            }
 
             function RenderChart(d3,d4, s1, s2, s3) {
                 const data = {
@@ -150,7 +263,14 @@
                                 beginAtZero: true
                             }
                         },
-                        maintainAspectRatio:false
+                        maintainAspectRatio: false,
+                        plugins: {
+                            labels: {
+                                render: 'value',
+                                fontStyle: 'bolder',
+                                
+                            }
+                        }  
 
                     }
                 })

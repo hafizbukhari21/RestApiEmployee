@@ -17,8 +17,8 @@
         </button>
         <table class="table table-striped" id="employeeTable" style="margin-top:20px">
             <thead>
+                <th class="">No</th>
             <th class=""></th>
-            <th class="">No</th>
             <th class="">Name</th>
             <th class=""> Education</th>
             <th class=""> Email</th>
@@ -318,35 +318,7 @@
         loading.style.display = "none"
 
         //update Table User
-        function format(d) {
-            return `
-                        <table class="table">
-                            <thead>
-                                <th scope="col">NIK</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Degree</th>
-                                <th scope="col">GPA</th>
-                                <th scope="col">University name</th>
-                            <thead>
-                            <tbody>
-                            <tr>
-                                <td>${d.nik}</td>
-                                <td>${d.firstName}</td>
-                                <td>${d.lastName}</td>
-                                <td>${d.phone}</td>
-                                <td>${d.email}</td>
-                                <td>${d.degree}</td>
-                                <td>${d.gpa}</td>
-                                <td>${d.univeristyName}</td>
-                            </tr>
-                            </tbody>
-                        </table>                    
-
-                `
-        }
+       
         $(document).ready(function () {
 
             table = $('#employeeTable').DataTable({
@@ -374,13 +346,14 @@
                        
                 },
                 columns: [
+                    null,
                     {
                         className: "dt-control",
                         orderable: false,
                         data: null,
                         defaultContent:''
                     },
-                    { data: "firstName" },
+                    
                     {
                         data: "firstName",
                         render: (data, type, row, meta) => {
@@ -411,11 +384,41 @@
                     }
                 ]
             });
+            function format(d) {
+                console.log(d)
+                return `
+                        <table class="table">
+                            <thead>
+                                <th scope="col">NIK</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Degree</th>
+                                <th scope="col">GPA</th>
+                                <th scope="col">University name</th>
+                            <thead>
+                            <tbody>
+                            <tr>
+                                <td>${d.nik}</td>
+                                <td>${d.firstName}</td>
+                                <td>${d.lastName}</td>
+                                <td>${d.phoneNumber}</td>
+                                <td>${d.email}</td>
+                                <td>${d.degree}</td>
+                                <td>${d.gpa}</td>
+                                <td>${d.univeristyName}</td>
+                            </tr>
+                            </tbody>
+                        </table>                    
 
+                `
+            }
 
             $("#employeeTable tbody").on("click", "td.dt-control", function () {
                 let tr = $(this).closest('tr')
                 let row = table.row(tr)
+                
                 if (row.child.isShown()) {
                     row.child.hide()
                     tr.removeClass("shown")
@@ -426,7 +429,7 @@
             })
             table.on("order.dt search.dt", () => {
                 let i = 1
-                table.cells(null, 1, { search: 'applied', order: 'applied' }).every(function (cell) {
+                table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
                     this.data(i++);
                 });
             }).draw()
