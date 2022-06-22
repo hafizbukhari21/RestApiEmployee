@@ -79,9 +79,15 @@ namespace API.Controllers
                     expires: DateTime.UtcNow.AddMinutes(18),
                     signingCredentials: signIn
                     );
-                var idtoken = new JwtSecurityTokenHandler().WriteToken(token);
-                claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
-                return Ok(new { StatusCode = HttpStatusCode.OK ,idtoken, message="berhasil" });
+               
+                if (token != null)
+                {
+                    var idtoken = new JwtSecurityTokenHandler().WriteToken(token);
+                    claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
+                    return Ok(new { StatusCode = HttpStatusCode.OK, idtoken, message = "berhasil" });
+                }
+                return Ok(new { StatusCode = 401, message = "Gagal" });
+
             }
             return BadRequest();
         }
