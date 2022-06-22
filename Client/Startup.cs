@@ -1,3 +1,5 @@
+using Client.Base;
+using Client.Repositories.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Client
@@ -24,7 +27,10 @@ namespace Client
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(opt=>opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+         
+            services.AddScoped<EmployeeRepository>();
+            services.AddScoped<Address>();
             
         }
 
@@ -46,6 +52,7 @@ namespace Client
 
             app.UseRouting();
 
+            
             app.UseAuthorization();
 
 

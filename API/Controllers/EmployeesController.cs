@@ -24,19 +24,20 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            try
-            {
-                return responseFormatter.ResponseFormater(
-                     200, 400,
-                     "Berhasil Mendapatkan semua Data Pegawai",
-                     "Data tidak Ditemukan",
-                     employeeRepository.Get()
-                 );
-            }
-            catch (Exception ex)
-            {
-                return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
-            }
+            return Ok(employeeRepository.Get());
+            //try
+            //{
+            //    return responseFormatter.ResponseFormater(
+            //         200, 400,
+            //         "Berhasil Mendapatkan semua Data Pegawai",
+            //         "Data tidak Ditemukan",
+                     
+            //     );
+            //}
+            //catch (Exception ex)
+            //{
+            //    return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
+            //}
         }
 
        
@@ -63,19 +64,21 @@ namespace API.Controllers
         [HttpGet("{nik}")]
         public ActionResult GetById(string nik)
         {
-            try
-            { 
-               return responseFormatter.ResponseFormater(
-                    200, 204, 
-                    "Data Ditemukan",
-                    "Data tidak Ditemukan",
-                    employeeRepository.Get(nik)
-                );
-            }
-            catch (Exception ex)
-            {
-                return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
-            }
+
+            return Ok(employeeRepository.Get(nik));
+            //try
+            //{ 
+            //   return responseFormatter.ResponseFormater(
+            //        200, 204, 
+            //        "Data Ditemukan",
+            //        "Data tidak Ditemukan",
+
+            //    );
+            //}
+            //catch (Exception ex)
+            //{
+            //    return responseFormatter.ResponseError(400, "Data tidak ditemukan", ex, Variable.isProduction);
+            //}
 
         }
 

@@ -323,9 +323,10 @@
 
             table = $('#employeeTable').DataTable({
                 ajax: {
-                    url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData",
+                    //url: "https://localhost:44360/api/baseController/EmployeeControllerV2/GetRegisterData",
+                    url:"https://localhost:44319/api/Employee/custom",
                     dataType: "json",
-                    dataSrc: "", 
+                    dataSrc: "result", 
                    
                 },
                 "processing": true,
@@ -373,7 +374,7 @@
                     {
                         data: "nik",
                         render: function (data, type, row, meta) {
-                            return `<button type="button" onClick="fetchUser('https://localhost:44360/api/Employees/${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            return `<button type="button" onClick="fetchUser('https://localhost:44319/api/Employee/custom/${data}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                                           Detail
                                     </button>
                                     <button type="button" onClick="deleteUser('https://localhost:44360/api/baseController/EmployeeControllerV2/DeleteAlternative?nik=${data}','${row.firstName+" "+row.lastName}')" class="btn btn-danger" >
@@ -485,13 +486,13 @@
                 url
             }).done(e => {
                 console.log(e)
-                $(".emailForm").val(e.payload.email)
-                $(".nikForm").val(e.payload.nik)
-                $(".phoneForm").val(e.payload.phone)
-                $(".firstNameForm").val(e.payload.firstName)
-                $(".lastNameForm").val(e.payload.lastName)
-                $(".birthDateForm").val(moment(e.payload.birthDate).format("YYYY-MM-DD").toString())
-                $(".salaryForm").val(e.payload.salary)
+                $(".emailForm").val(e.result.email)
+                $(".nikForm").val(e.result.nik)
+                $(".phoneForm").val(e.result.phone)
+                $(".firstNameForm").val(e.result.firstName)
+                $(".lastNameForm").val(e.result.lastName)
+                $(".birthDateForm").val(moment(e.result.birthDate).format("YYYY-MM-DD").toString())
+                $(".salaryForm").val(e.result.salary)
                 
               
 

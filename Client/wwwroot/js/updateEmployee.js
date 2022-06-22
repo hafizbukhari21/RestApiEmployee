@@ -94,7 +94,7 @@ function insertData() {
     ) {
         loading.style.display = "flex"
             $.ajax({
-                url: "https://localhost:44360/api/baseController/EmployeeControllerV2/register",
+                url: "https://localhost:44319/api/Employee/custom",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data)
