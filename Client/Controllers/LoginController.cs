@@ -45,6 +45,13 @@ namespace Client.Controllers
             return Json(result);
 
         }
+        [HttpGet]
+        public void Logout()
+        {
+            HttpContext.Session.Remove("JWToken");
+
+            HttpContext.Response.Redirect("/LoginPage");
+        }
 
 
     }
