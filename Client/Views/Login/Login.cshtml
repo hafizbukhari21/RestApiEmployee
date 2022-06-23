@@ -3,11 +3,11 @@
 *@
 @{
     ViewData["Title"] = "";
-    Layout = "_LayoutSbAdm";
+    Layout = "_LayoutLogin";
 }
 
 
-<div class="card">
+<div class="card" style="width:500px;margin-top:25vh;">
     <div class="card-body">
         <form id="formLogin">
             <div class="form-group">
@@ -46,7 +46,9 @@
                 data: data
             }).done(e => {
                 if (e.statusCode == 200) {
-                    window.location.replace("../login")
+                    Swal.fire('Berhasil Login', '', 'success')
+                    setTimeout(() => {
+                        window.location.replace("../login")},2000)
                 } else {
                     Swal.fire({
                         icon: 'error',

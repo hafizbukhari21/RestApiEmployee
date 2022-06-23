@@ -20,7 +20,7 @@ namespace Client.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize(Roles = "Employee")]
         public IActionResult Index()
         {
             return View();
@@ -40,7 +40,7 @@ namespace Client.Controllers
             if (result.idToken != null)
             {
                 HttpContext.Session.SetString("JWToken", result.idToken);
-                
+                HttpContext.Session.SetString("Email", login.email);
             }
             return Json(result);
 

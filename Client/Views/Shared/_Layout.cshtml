@@ -19,44 +19,44 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand logo" asp-controller="Home" asp-action="Index">
-                    <img src="https://hafizbukhari21.github.io/portofolio/asets/Hafiz.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-                    My App
-                </a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarNav">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
-                        <li class="nav-item  ">
+    @*<header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container">
+                    <a class="navbar-brand logo" asp-controller="Home" asp-action="Index">
+                        <img src="https://hafizbukhari21.github.io/portofolio/asets/Hafiz.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        My App
+                    </a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="navbarNav">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
+                            <li class="nav-item  ">
 
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Home/Content">Content</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Home/Latihan">Latihan Pokemon</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Home/ShowEmployee">Latihan Tampil Employee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://hafizbukhari21.github.io/portofolio/">About</a>
-                        </li>
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Home/Content">Content</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Home/Latihan">Latihan Pokemon</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Home/ShowEmployee">Latihan Tampil Employee</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://hafizbukhari21.github.io/portofolio/">About</a>
+                            </li>
 
-                    </ul>
+                        </ul>
 
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>*@
     <div class="bgWrapper">
         <div class="bg">
-            @*<div class="bg-circle circle1"></div>
-                <div class="bg-circle circle2"></div>*@
+            <div class="bg-circle circle1"></div>
+            <div class="bg-circle circle2"></div>
         </div>
     </div>
     <div class="container">
@@ -74,11 +74,10 @@
     </footer>
 
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
+    <script src="~/vendor/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -88,23 +87,23 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @RenderSection("Scripts", required: false)
 
     <script>
-        let isChange = false
-        let navbar = document.querySelector(".navbar")
-        let logo = document.querySelector(".logo").addEventListener("click", e => {
-            e.preventDefault();
-            if (!isChange) {
-                navbar.style.setProperty("background-color", "black", "important")
-                isChange = true
-            } else {
-                navbar.style.backgroundColor = ""
-                isChange = false
-            }
+        //let isChange = false
+        //let navbar = document.querySelector(".navbar")
+        //let logo = document.querySelector(".logo").addEventListener("click", e => {
+        //    e.preventDefault();
+        //    if (!isChange) {
+        //        navbar.style.setProperty("background-color", "black", "important")
+        //        isChange = true
+        //    } else {
+        //        navbar.style.backgroundColor = ""
+        //        isChange = false
+        //    }
 
-        })
+        //})
 
     </script>
 </body>

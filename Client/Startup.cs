@@ -33,7 +33,9 @@ namespace Client
         {
             
             services.AddControllersWithViews().AddNewtonsoftJson(opt=>opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddSession();
+            services.AddSession(
+                opt=> opt.IdleTimeout =TimeSpan.FromMinutes(30)
+                );
             services.AddHttpContextAccessor();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<Address>();

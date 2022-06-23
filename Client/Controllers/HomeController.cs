@@ -1,4 +1,5 @@
 ﻿using Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,17 +23,19 @@ namespace Client.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Employee")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Authorize(Roles = "Employee")]
         public IActionResult Content()
         {
             return View("Content");
         }
 
+        [Authorize(Roles = "Employee")]
         public IActionResult Latihan()
         {
             return View("Latihan");
@@ -43,6 +46,7 @@ namespace Client.Controllers
             return View("ShowEmployee");
         }
 
+        [Authorize(Roles = "Employee")]
         public IActionResult LatihanChart()
         {
             return View("LatihanChart");
