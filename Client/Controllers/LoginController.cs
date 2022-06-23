@@ -46,7 +46,7 @@ namespace Client.Controllers
             if (result.idToken != null)
             {
                 HttpContext.Session.SetString("JWToken", result.idToken);
-                HttpContext.Session.SetString("Email", login.email);
+                HttpContext.Session.SetString("nama", result.message);
             }
             return Json(result);
 

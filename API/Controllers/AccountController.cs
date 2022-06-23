@@ -49,9 +49,10 @@ namespace API.Controllers
         [HttpPost("cobalogin")]
         public ActionResult GetLogin(LoginPegawaiVM loginPegawaiVM)
         {
-            if (accountRepository.Login(loginPegawaiVM) == Variable.EMAIL_NOT_FOUND) 
+            string nama = "";
+            if (accountRepository.Login(loginPegawaiVM, out nama) == Variable.EMAIL_NOT_FOUND) 
                 return StatusCode(202, new { Message="email tidak sesuai" });
-            else if (accountRepository.Login(loginPegawaiVM) == Variable.PASSWORD_NOT_FOUND) 
+            else if (accountRepository.Login(loginPegawaiVM, out nama) == Variable.PASSWORD_NOT_FOUND) 
                 return StatusCode(202, new { Message = "password tidak sesuai" });
             else 
                 return StatusCode(202, new { Message = "Berhasil login" });
@@ -60,7 +61,8 @@ namespace API.Controllers
         [HttpPost("Login")]
         public ActionResult Login(LoginPegawaiVM loginPegawaiVM)
         {
-            if (accountRepository.Login(loginPegawaiVM) == 200)
+            string nama = "";
+            if (accountRepository.Login(loginPegawaiVM,out nama) == 200)
             {
                
                 var claims = new List<Claim>();
@@ -84,7 +86,7 @@ namespace API.Controllers
                 {
                     var idtoken = new JwtSecurityTokenHandler().WriteToken(token);
                     claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
-                    return Ok(new { StatusCode = HttpStatusCode.OK, idtoken, message = "berhasil" });
+                    return Ok(new { StatusCode = HttpStatusCode.OK, idtoken, message = nama });
                 }
                 return Ok(new { StatusCode = 401, message = "Gagal" });
 

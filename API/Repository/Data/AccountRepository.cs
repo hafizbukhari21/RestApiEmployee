@@ -21,10 +21,10 @@ namespace API.Repository.Data
             this.contex = myContext;
         }
 
-        public float Login(LoginPegawaiVM loginPegawaiVM)
+        public float Login(LoginPegawaiVM loginPegawaiVM, out string nama)
         {
             Employee emCkh = contex.Employees.Include("account").FirstOrDefault(emp => emp.Email == loginPegawaiVM.email);
-
+            nama = emCkh.FirstName;
             if (emCkh.Email != loginPegawaiVM.email) return Variable.EMAIL_NOT_FOUND;// email gk ada
             else if (!BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, emCkh.account.password)) return Variable.PASSWORD_NOT_FOUND;//password tidak match
 
