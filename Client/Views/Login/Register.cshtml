@@ -1,0 +1,238 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "";
+    Layout = "_LayoutLogin";
+}
+
+
+<div class="card" style="width:500px;margin-top:10vh;">
+    <div class="card-body">
+        <div class="loadingWrapper">
+            <div>
+                @{
+                    Html.RenderPartial("~/Views/Home/LoadingSceene.cshtml");
+                }
+            </div>
+        </div>
+        <form class="registerForm" novalidate>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="firstName_i">Email address</label>
+                        <input required type="email" class="form-control emailInsert " id="firstName_i" aria-describedby="emailHelp">
+                        <div class="invalid-feedback emailfeedbackInsert">
+                            Invalid Email
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="firstName_i">Password</label>
+                        <input required type="text" class="form-control passwordInsert" id="firstName_i" aria-describedby="emailHelp">
+                        <div class="invalid-feedback passwordFeedbackInsert">
+                            Invalid Password
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First Name</label>
+                        <input required type="text" class="form-control firstNameInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Invalid FIrst Name
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Last Name</label>
+                        <input required type="text" class="form-control lastNameInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Invalid Last Name
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">GPA</label>
+                        <input required type="text" class="form-control gpaInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="col">
+                    @*<div class="form-group">
+                        <input required type="text" class="form-control degreeInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Invalid Degree
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Degree</label>
+
+                        <select required class="form-control degreeInsert" id="exampleFormControlSelect2">
+                            <option value="D3">D3</option>
+                            <option value="D4">D4</option>
+                            <option value="S1">S1</option>
+                            <option value="S2">S2</option>
+                            <option value="S3">S3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <label class="ml-3" for="exampleInputEmail1">Gender</label>
+                    </div>
+                    <div class="input-group ">
+
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+
+                                    <input class="form-check-input genderInsert" type="radio" name="genderInsert" id="exampleRadios1" value="Male" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Male
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input genderInsert" type="radio" name="genderInsert" id="exampleRadios1" value="Female">
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">BirthDate</label>
+                        <input required type="date" class="form-control birthDateInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Invalid Birth Date
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Salary</label>
+                        <input required type="number" class="form-control salaryInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Invalid Salary
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Pilih Kampus Anda</label>
+                        <select required class="form-control universityIdInsert" id="exampleFormControlSelect2">
+                            <option value="1">Binus</option>
+                            <option value="2">UPH</option>
+                            <option value="3">UI</option>
+
+                        </select>
+                        <div class="invalid-feedback">
+                            Choose your Education
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone</label>
+                        <input required type="number" class="form-control phoneInsert" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Invalid Phone Number
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary insert">Register</button>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        let loading = document.querySelector(".loadingWrapper")
+        loading.style.display = "none"
+
+        $(".registerForm").submit((e) => {
+            e.preventDefault()
+            insertData()
+        })
+
+
+
+
+        function insertData() {
+
+
+            let data = {
+                firstName: document.querySelector(".firstNameInsert").value,
+                lastName: document.querySelector(".lastNameInsert").value,
+                phone: document.querySelector(".phoneInsert").value,
+                birthDate: document.querySelector(".birthDateInsert").value,
+                salary: document.querySelector(".salaryInsert").value,
+                email: document.querySelector(".emailInsert").value,
+                gender: document.querySelector(`input[name="genderInsert"]:checked`).value,
+                gpa: document.querySelector(".gpaInsert").value,
+                degree: document.querySelector(".degreeInsert").value,
+                password: document.querySelector(".passwordInsert").value,
+                univeristyId: document.querySelector(".universityIdInsert").value,
+
+            }
+
+
+            console.log(data)
+
+            if (
+                checkEmailValidity(
+                    data.email,
+                    ".emailfeedbackInsert", ".emailInsert",
+                    "Please Reformat your Email address"
+                ) && checkPassword(data.password, ".passwordFeedbackInsert")
+            ) {
+                loading.style.display = "flex"
+                $.ajax({
+                    url: "https://localhost:44360/api/baseController/EmployeeControllerV2/register",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data)
+                }).done(e => {
+                    loading.style.display = "none"
+                    Swal.fire('Berhasil Menambahkan Data', '', 'success')
+                    console.log(e)
+                }).fail(err => console.log(err))
+
+                console.log(data)
+                setTimeout(() => {
+                    table.ajax.reload()
+                }, 3000)
+            }
+
+
+        }
+    </script>
+    
+}

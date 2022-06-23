@@ -45,6 +45,7 @@
                 
                 data: data
             }).done(e => {
+                console.log(e)
                 if (e.statusCode == 200) {
                     Swal.fire('Berhasil Login', '', 'success')
                     setTimeout(() => {

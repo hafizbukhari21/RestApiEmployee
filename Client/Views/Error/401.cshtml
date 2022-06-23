@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "";
+    Layout = "_LayoutLogin";
+}
+
+<div class="card" style="width:550px;margin-top:25vh;">
+    <div class="card-body">
+        <h2>UnAuthorize</h2>
+        <p>
+            Silahkan Login Terlebih dahulu. Akan diarahkan ke Login dalam  <span style="font-size:20px;" class="badge badge-primary counterDisplay">0</span>
+
+        </p>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            let counterdisplay = document.querySelector(".counterDisplay")
+            let time = 10
+            setInterval(() => {
+                console.log("sds")
+                decreaseTime()
+                counterdisplay.innerHTML = time
+                if (time == 0) window.location.replace("../LoginPage")
+            }, 1000)
+
+            let decreaseTime = () => time--
+        })
+    </script>
+
+}

@@ -40,7 +40,7 @@ namespace Client.Controllers
         {
             return View("Latihan");
         }
-
+        [Authorize(Roles = "Employee")]
         public IActionResult ShowEmployee()
         {
             return View("ShowEmployee");

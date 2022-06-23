@@ -79,7 +79,20 @@ namespace Client
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseStatusCodePages(async ctx =>
+            {
+                var request = ctx.HttpContext.Request;
+                var response = ctx.HttpContext.Response;
 
+                if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
+                {
+                    response.Redirect("/");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
+                {
+                    response.Redirect("/Unauthorize");
+                }
+            });
             app.UseSession();
             app.Use(async (context, next) =>
             {
@@ -103,16 +116,7 @@ namespace Client
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseStatusCodePages(async ctx =>
-            {
-                var request = ctx.HttpContext.Request;
-                var response = ctx.HttpContext.Response;
-
-                if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
-                {
-                    response.Redirect("/");
-                }
-            });
+           
 
             
         }

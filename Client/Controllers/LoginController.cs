@@ -20,7 +20,7 @@ namespace Client.Controllers
         }
 
 
-        //[Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Employee")]
         public IActionResult Index()
         {
             return View();
@@ -32,7 +32,13 @@ namespace Client.Controllers
             return View("Login");
         }
 
-       
+        [Route("Registerpage")]
+        public IActionResult RegisterPage()
+        {
+            return View("Register");
+        }
+
+
         [HttpPost]
         public async Task<JsonResult> Auth(LoginPegawaiVM login)
         {

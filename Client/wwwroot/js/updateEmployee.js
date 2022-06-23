@@ -14,6 +14,8 @@ function updateData() {
         email: document.querySelector(".emailForm").value,
        
     }
+
+
   
     $.ajax({
         url: "https://localhost:44360/api/baseController/EmployeeControllerV2/withPost",
@@ -82,6 +84,7 @@ function insertData() {
         univeristyId: document.querySelector(".universityIdInsert").value,
 
     }
+
 
     console.log(data)
 
