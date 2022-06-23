@@ -92,6 +92,10 @@ namespace Client
                 {
                     response.Redirect("/Unauthorize");
                 }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
+                {
+                    response.Redirect("/Forbidden");
+                }
             });
             app.UseSession();
             app.Use(async (context, next) =>

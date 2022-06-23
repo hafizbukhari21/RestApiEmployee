@@ -18,5 +18,11 @@ namespace Client.Controllers
         {
             return View("401");
         }
+
+        [Route("Forbidden")]
+        public IActionResult Forbidden()
+        {
+            return View("403");
+        }
     }
 }

@@ -20,15 +20,20 @@ namespace Client.Controllers
         }
 
 
-        [Authorize(Roles = "Employee")]
+        [Authorize]
         public IActionResult Index()
         {
+           
             return View();
         }
 
         [Route("Loginpage")]
         public IActionResult LoginPage()
         {
+            if (HttpContext.Session.GetString("JWToken") != null)
+            {
+                return Redirect("/Login");
+            }
             return View("Login");
         }
 
@@ -54,7 +59,7 @@ namespace Client.Controllers
         [HttpGet]
         public void Logout()
         {
-            HttpContext.Session.Remove("JWToken");
+            HttpContext.Session.Clear();
 
             HttpContext.Response.Redirect("/LoginPage");
         }

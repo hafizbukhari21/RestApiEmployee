@@ -23,30 +23,30 @@ namespace Client.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Employee")]
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
         }
 
-        [Authorize(Roles = "Employee")]
+        [Authorize]
         public IActionResult Content()
         {
             return View("Content");
         }
 
-        [Authorize(Roles = "Employee")]
+        [Authorize]
         public IActionResult Latihan()
         {
             return View("Latihan");
         }
-        [Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Direktur")]
         public IActionResult ShowEmployee()
         {
             return View("ShowEmployee");
         }
 
-        [Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Direktur")]
         public IActionResult LatihanChart()
         {
             return View("LatihanChart");

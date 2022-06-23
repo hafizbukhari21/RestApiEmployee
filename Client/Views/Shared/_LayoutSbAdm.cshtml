@@ -191,23 +191,28 @@
                     <span>Latihan Pokemon</span>
                 </a>
             </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="../Home/ShowEmployee">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Latihan Tampil APi</span>
-                </a>
-            </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="../Home/LatihanChart">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Latihan Tampil Chart</span>
-                </a>
-            </li>
+            @if (User.IsInRole("Direktur"))
+            {
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="../Home/ShowEmployee">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Latihan Tampil APi</span>
+                    </a>
+                </li>
 
-            
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="../Home/LatihanChart">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Latihan Tampil Chart</span>
+                    </a>
+                </li>
+            }
+
+
+
 
             @using Microsoft.AspNetCore.Http
             @inject IHttpContextAccessor Accessor
