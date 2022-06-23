@@ -6,51 +6,13 @@
     Layout = "_LayoutSbAdm";
 }
 
-<style>
-    .idleWrapper, .idleWrapper-rel{
-        width:100vw;
-        height:100vh;
-        
-    }
-    .idleWrapper {
-        position: fixed;
-        z-index: 10;
-        display:none;
-        top: 0;
-        left: 0;
-        display:flex;
-        
-    }
-    .idleWrapper-rel{
-        
-        position:relative;
-    }
-    .idleContent {
-        width: 200px;
-        height: 100px;
-        position: absolute;
-        top: 0;
-        left: 0;
-       
-    }
-    
-    
-</style>
+
 
 @using Microsoft.AspNetCore.Http
 @using System.Net.Mail
 @inject IHttpContextAccessor Accessor
 
-    <div class="idleWrapper">
-        <div class="idleWrapper-rel">
-            <div class="card idleContent">
-                <div class="card-header">Warning</div>
-                <div class="card-body">
-                    Logout dalam <span class="badge badge-danger time">5</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 <div class="card" style="margin-top:150px">
     <div class="card-body">
         <h3>Hello <span class="badge badge-primary">@Context.Session.GetString("Email")</span> </h3> 
@@ -59,19 +21,5 @@
 
 @section Scripts{
 
-    <script>
-        let idleTimeSecond = 60
-        $(document).ready(() => {
-            window.setInterval(() => {
-                decreaseTime()
-            }, 1000)
-        })
-
-        function decreaseTime() {
-            idleTimeSecond--
-            document.querySelector(".time").innerHTML = idleTimeSecond
-            console.log(idleTimeSecond)
-        }
-
-    </script>
+    
  }

@@ -37,9 +37,36 @@
             display: flex;
         }
 
-        .loadingWrapper > div {
+            .loadingWrapper > div {
+                width: 200px;
+                height: 200px;
+                margin: auto;
+            }
+    </style>
+    <style>
+        .idleWrapper, .idleWrapper-rel {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .idleWrapper {
+            position: fixed;
+            z-index: 10;
+            display: none;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .idleWrapper-rel {
+            background-color: rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+        }
+
+        .idleContent {
             width: 200px;
-            height: 200px;
+            height: 100px;
             margin: auto;
         }
     </style>
@@ -429,11 +456,22 @@
                     <div class="bgWrapper">
                         <div class="bg">
                             @*<div class="bg-circle circle1"></div>
-                                <div class="bg-circle circle2"></div>*@
+                <div class="bg-circle circle2"></div>*@
+                        </div>
+                    </div>
+                    <div class="idleWrapper">
+                        <div class="idleWrapper-rel">
+                            <div class="card idleContent">
+                                <div class="card-header">Warning</div>
+                                <div class="card-body">
+                                    Logout dalam <span class="badge badge-danger time">5</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="container">
                         <main role="main" class="pb-3 ">
+
                             @RenderBody()
 
                         </main>
@@ -532,7 +570,46 @@
     <script src="~/lib/dist/jquery.validate.js"></script>
     <script src="~/js/ValidationModules.js"></script>
     @RenderSection("Scripts", required: false)
+<script>
+    
+    let idleStarting = 60
+    let idleTimeSecond = idleStarting
+    let getWrapperStyle = document.querySelector(".idleWrapper")
+    $(document).ready(() => {
+    
+        window.setInterval(() => {
+    
+            $(this).mousemove(function (e) {
+                idleTimeSecond = idleStarting;
+                getWrapperStyle.style.display = "none"
+    
+            });
+            $(this).keypress(function (e) {
+                idleTimeSecond = idleStarting;
+                getWrapperStyle.style.display = "none"
+            });
+    
+            decreaseTime()
+    
+            if (idleTimeSecond < 60) {
+                getWrapperStyle.style.display = "flex"
+            }
+    
+            if (idleTimeSecond == 0) {
+                window.location.replace("../Login/Logout")
+            }
+        }, 1000)
+    })
+    
+    
+    function decreaseTime() {
+        idleTimeSecond--
+        document.querySelector(".time").innerHTML = idleTimeSecond
+        console.log(idleTimeSecond)
+    }
 
+
+    </script>
 </body>
 
 </html>
