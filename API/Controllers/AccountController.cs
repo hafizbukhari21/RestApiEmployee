@@ -50,6 +50,7 @@ namespace API.Controllers
         public ActionResult GetLogin(LoginPegawaiVM loginPegawaiVM)
         {
             string nama = "";
+            
             if (accountRepository.Login(loginPegawaiVM, out nama) == Variable.EMAIL_NOT_FOUND) 
                 return StatusCode(202, new { Message="email tidak sesuai" });
             else if (accountRepository.Login(loginPegawaiVM, out nama) == Variable.PASSWORD_NOT_FOUND) 
@@ -90,6 +91,14 @@ namespace API.Controllers
                 }
                 return Ok(new { StatusCode = 401, message = "Gagal" });
 
+            }
+            else if (accountRepository.Login(loginPegawaiVM, out nama) == Variable.EMAIL_NOT_FOUND)
+            {
+                return Ok(new { StatusCode = Variable.EMAIL_NOT_FOUND, idtoken = "", message = "" });
+            }
+            else if (accountRepository.Login(loginPegawaiVM, out nama) == Variable.PASSWORD_NOT_FOUND)
+            {
+                return Ok(new { StatusCode = Variable.PASSWORD_NOT_FOUND, idtoken = "", message = "" });
             }
             return BadRequest();
         }

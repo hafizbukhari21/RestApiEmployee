@@ -13,6 +13,9 @@
             Silahkan Login Terlebih dahulu. Akan diarahkan ke Login dalam  <span style="font-size:20px;" class="badge badge-primary counterDisplay">0</span>
 
         </p>
+        <div>
+            <progress value="0" max="10" id="progressBar"></progress>
+        </div>
     </div>
 </div>
 
@@ -20,11 +23,14 @@
     <script>
         $(document).ready(function () {
             let counterdisplay = document.querySelector(".counterDisplay")
+            let bar = document.querySelector("progress");
             let time = 10
+            bar.max = time
             setInterval(() => {
                 console.log("sds")
                 decreaseTime()
                 counterdisplay.innerHTML = time
+                bar.value = time
                 if (time == 0) window.location.replace("../LoginPage")
             }, 1000)
 

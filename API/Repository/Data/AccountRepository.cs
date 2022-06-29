@@ -24,11 +24,23 @@ namespace API.Repository.Data
         public float Login(LoginPegawaiVM loginPegawaiVM, out string nama)
         {
             Employee emCkh = contex.Employees.Include("account").FirstOrDefault(emp => emp.Email == loginPegawaiVM.email);
-            nama = emCkh.FirstName;
-            if (emCkh.Email != loginPegawaiVM.email) return Variable.EMAIL_NOT_FOUND;// email gk ada
-            else if (!BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, emCkh.account.password)) return Variable.PASSWORD_NOT_FOUND;//password tidak match
 
-           
+            if(emCkh == null)
+            {
+                nama = "";
+                return Variable.EMAIL_NOT_FOUND;
+            }
+            if (emCkh.Email != loginPegawaiVM.email  )
+            {
+                nama = "";
+                return Variable.EMAIL_NOT_FOUND;
+            }// email gk ada
+            else if (!BCrypt.Net.BCrypt.Verify(loginPegawaiVM.password, emCkh.account.password)) { 
+                nama = "";
+                return Variable.PASSWORD_NOT_FOUND; 
+            }//password tidak match
+
+            nama = emCkh.FirstName;
             return 200;
 
         }

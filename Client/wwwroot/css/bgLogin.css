@@ -18,7 +18,7 @@
     position: absolute;
     transform: rotateZ(0deg);
     background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,88,113,1) 100%);
-    animation: rotateBg 60s infinite linear;
+    animation: rotateBg 5s infinite linear;
     display: flex;
     justify-content: center;
     align-items: center;

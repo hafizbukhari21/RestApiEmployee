@@ -10,7 +10,7 @@
         <p class="text-light">
             Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
         </p>
-        <a href="../LoginPage" class="btn btn-primary getStarted">Login</a>
+        <a  class="btn btn-primary getStarted">Login</a>
     </div>
     <div class="col">
         <div class="row gridContainer" style="background-color:aliceblue">
@@ -118,7 +118,7 @@
 </section>
 
 
-<div class="modal fade getStartedModal" tabindex="-1" role="dialog">
+@*<div class="modal fade getStartedModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -136,8 +136,26 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
+
+@section Scripts{
+  
+    <script>
+        document.querySelector(".getStarted").addEventListener("click", () => {
+            
+            anime({
+                targets: '.align-items-center',
+                translateY: 850,
+                duration: 2000
+                
+            });
+            setTimeout(() => {
+                window.location.replace("../LoginPage")
+            }, 2000)
+        })
+    </script>
+ }
 
 <script src ="~/js/index.js"></script>
 

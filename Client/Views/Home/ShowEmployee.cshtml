@@ -346,8 +346,13 @@
                     ]
                        
                 },
+                initComplete: function () {
+                    var btns = $('.dt-button');
+                    btns.addClass('btn btn-primary btn-sm');
+                    btns.removeClass('dt-button');
+                },
                 columns: [
-                    null,
+                    { data: "nik" },
                     {
                         className: "dt-control",
                         orderable: false,
@@ -390,7 +395,7 @@
                 return `
                         <table class="table">
                             <thead>
-                                <th scope="col">NIK</th>
+                                
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Phone</th>
@@ -401,7 +406,7 @@
                             <thead>
                             <tbody>
                             <tr>
-                                <td>${d.nik}</td>
+                                
                                 <td>${d.firstName}</td>
                                 <td>${d.lastName}</td>
                                 <td>${d.phoneNumber}</td>

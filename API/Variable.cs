@@ -21,8 +21,9 @@ namespace API
             //isProduction  
         };
 
-        public const float EMAIL_NOT_FOUND = -1;
-        public const float PASSWORD_NOT_FOUND = -2;
+        public const int EMAIL_NOT_FOUND = 10;
+        public const int PASSWORD_NOT_FOUND = 20;
+        public const int ACCOUNT_NOT_FOUND = 30;
 
 
 

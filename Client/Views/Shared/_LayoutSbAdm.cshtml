@@ -65,8 +65,8 @@
         }
 
         .idleContent {
-            width: 200px;
-            height: 100px;
+            width: 500px;
+           
             margin: auto;
         }
     </style>
@@ -469,7 +469,10 @@
                             <div class="card idleContent">
                                 <div class="card-header">Warning</div>
                                 <div class="card-body">
-                                    Logout dalam <span class="badge badge-danger time">5</span>
+                                    <p style="display:inline" class="wordLogout">Logout dalam</p> <span class="badge badge-danger time">5</span>
+                                   <br/>
+                                   <progress value="0" max="10" id="progressBar"></progress>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -580,6 +583,8 @@
     let idleStarting = 65
     let idleTimeSecond = idleStarting
     let getWrapperStyle = document.querySelector(".idleWrapper")
+    let bar = document.querySelector("progress");
+    bar.max = idleStarting
     $(document).ready(() => {
     
         window.setInterval(() => {
@@ -595,9 +600,17 @@
             });
     
             decreaseTime()
-    
+
+            
             if (idleTimeSecond < 60) {
                 getWrapperStyle.style.display = "flex"
+                if (idleTimeSecond < 20) {
+                    document.querySelector(".wordLogout").innerHTML = "Gerakin gak mousenya kalo gk gw logout nih"
+                }
+                else {
+                    document.querySelector(".wordLogout").innerHTML = "Logout Dalam"
+
+                }
             }
     
             if (idleTimeSecond == 0) {
@@ -610,7 +623,8 @@
     function decreaseTime() {
         idleTimeSecond--
         document.querySelector(".time").innerHTML = idleTimeSecond
-        console.log(idleTimeSecond)
+        bar.value = idleTimeSecond
+        
     }
 
 
