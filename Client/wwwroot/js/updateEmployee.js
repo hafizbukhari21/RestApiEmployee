@@ -46,6 +46,7 @@ window.addEventListener('load', function () {
     actionForm(document.getElementsByClassName('needs-validation-update-form'),updateData)
 }, false);
 
+
 function actionForm(forms, actionApi) {
 
     var validation = Array.prototype.filter.call(forms, function (form) {

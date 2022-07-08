@@ -46,7 +46,7 @@ namespace Client.Controllers
             return View("ShowEmployee");
         }
 
-        [Authorize(Roles = "Direktur")]
+        [Authorize(Roles = "Direktur, Employee")]
         public IActionResult LatihanChart()
         {
             return View("LatihanChart");
